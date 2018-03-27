@@ -11,7 +11,9 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
         MainFragment.OnFragmentInteractionListener,
         MyDatesFragment.OnFragmentInteractionListener,
-        FavoriteDateFragment.OnFragmentInteractionListener {
+        FavoriteDateFragment.OnFragmentInteractionListener,
+        CreateDateFragment.OnFragmentInteractionListener,
+        SearchFragment.OnFragmentInteractionListener {
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
@@ -38,14 +40,20 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Fragment fragment = null;
 
         switch (item.getItemId()) {
-            case R.id.navigation_home:
+            case R.id.navigation_my_dates:
                 fragment = new MyDatesFragment();
                 break;
-            case R.id.navigation_dashboard:
+            case R.id.navigation_favorites:
                 fragment = new FavoriteDateFragment();
                 break;
-            case R.id.navigation_notifications:
+            case R.id.navigation_main:
                 fragment = new MainFragment();
+                break;
+            case R.id.navigation_create_date:
+                fragment = new CreateDateFragment();
+                break;
+            case R.id.navigation_search:
+                fragment = new SearchFragment();
                 break;
         }
 
