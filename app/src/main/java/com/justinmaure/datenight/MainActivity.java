@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         navigation.setOnNavigationItemSelectedListener(this);
 
         loadFragment(new MainFragment());
+        //Use if statement to check if user is logged in. if not send them to the login page. if so then launch main fragment
     }
 
     @Override

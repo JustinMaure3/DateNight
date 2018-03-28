@@ -111,4 +111,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(user)});
         db.close();
     }
+
+    //DATE CRUD OPERATIONS
+    //Create
+
+    //Read
+
+    //Update
+
+    //Delete
+
 }
