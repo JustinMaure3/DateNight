@@ -198,7 +198,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         if (!tryLogIn(username, password)){
-            mUsernameView.setError("Wrong password");
+            mPasswordView.setError("Wrong password");
         }
 
         if (cancel) {
