@@ -85,7 +85,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return user;
     }
 
-    public ArrayList<User> getAllLocations(){
+    public User getUserByName(String username){
+        SQLiteDatabase db = this.getReadableDatabase();
+        User user = null;
+        Cursor cursor = db.query(TABLE_USER,
+                new String[]{COLUMN_ID, COLUMN_USERNAME, COLUMN_PASSWORD, COLUMN_EMAIL},
+                COLUMN_USERNAME + "=?", new String[]{String.valueOf(username)},
+                null, null, null, null);
+        if(cursor != null){
+            cursor.moveToFirst();
+            user = new User(Integer.parseInt(cursor.getString(0)),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3));
+        }
+        db.close();
+        return user;
+    }
+
+    public ArrayList<User> getAllUsers(){
         ArrayList<User> userList = new ArrayList<User>();
         String query = "SELECT * FROM " + TABLE_USER;
         SQLiteDatabase db = this.getReadableDatabase();
