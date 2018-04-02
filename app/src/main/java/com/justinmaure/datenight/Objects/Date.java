@@ -9,14 +9,14 @@ public class Date {
     private String dateName;
     private String description;
     private String picture;
-    private Boolean isPublic = false;
+    private Integer isPublic = 0;
     private Integer rating;
 //    private String location;
     private String creatorName;
-    private Boolean isFavourited;
+    private Integer isFavourited;
 
-    public Date(String dateName, String description, String picture, boolean isPublic,
-                Integer rating, String creatorName, Boolean isFavourited){
+    public Date(String dateName, String description, String picture, Integer isPublic,
+                Integer rating, String creatorName, Integer isFavourited){
         this.dateName = dateName;
         this.description = description;
         this.picture = picture;
@@ -26,8 +26,8 @@ public class Date {
         this.isFavourited = isFavourited;
     }
 
-    public Date(Integer id, String dateName, String description, String picture, boolean isPublic,
-                Integer rating, String creatorName, Boolean isFavourited) {
+    public Date(Integer id, String dateName, String description, String picture, Integer isPublic,
+                Integer rating, String creatorName, Integer isFavourited) {
         this.id = id;
         this.dateName = dateName;
         this.description = description;
@@ -62,11 +62,11 @@ public class Date {
         this.picture = picture;
     }
 
-    public Boolean getPublic() {
+    public Integer getPublic() {
         return isPublic;
     }
 
-    public void setPublic(Boolean aPublic) {
+    public void setPublic(Integer aPublic) {
         isPublic = aPublic;
     }
 
@@ -86,11 +86,11 @@ public class Date {
         this.creatorName = creatorName;
     }
 
-    public Boolean getFavourited() {
+    public Integer getFavourited() {
         return isFavourited;
     }
 
-    public void setFavourited(Boolean favourited) {
+    public void setFavourited(Integer favourited) {
         isFavourited = favourited;
     }
 }
