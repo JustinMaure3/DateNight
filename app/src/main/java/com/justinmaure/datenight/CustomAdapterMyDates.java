@@ -55,7 +55,6 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
     class CustomViewHolder extends RecyclerView.ViewHolder{
         protected TextView dateName;
         protected TextView description;
-        protected TextView rating;
         protected ImageView picture;
         protected ImageView isPublic;
 
@@ -64,7 +63,6 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
             this.dateName = (TextView) view.findViewById(R.id.name);
             this.description = (TextView) view.findViewById(R.id.description);
             this.picture = (ImageView) view.findViewById(R.id.picture);
-            this.rating = (TextView) view.findViewById(R.id.rating);
             this.isPublic = (ImageView) view.findViewById(R.id.isPublic);
 
         }
