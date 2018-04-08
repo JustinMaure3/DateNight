@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
+
+import com.justinmaure.datenight.Objects.Date;
 
 
 /**
@@ -36,6 +39,7 @@ public class CreateDateFragment extends Fragment {
     private EditText dateName;
     private EditText description;
     private Switch isPublic;
+    private int isPublicNum = 0;
     private Button submitBtn;
 
     private OnFragmentInteractionListener mListener;
@@ -94,6 +98,13 @@ public class CreateDateFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 //Add code to change the text from private to public and back
+                if (isPublic.isChecked()) {
+                    isPublic.setText("Public");
+                    isPublicNum = 1;
+                } else {
+                    isPublic.setText("Private");
+                    isPublicNum = 0;
+                }
             }
         });
 
@@ -102,10 +113,15 @@ public class CreateDateFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //Add code to grab all variables and make a new date in the date table
+                DatabaseHelper db = new DatabaseHelper(getContext());
+                db.addDate(new Date(0, dateName.getText().toString(),description.getText().toString(), picture.toString(),isPublicNum, 0, MainActivity.currentUser.getUsername(), 0));
+                db.close();
+                dateName.setText("");
+                description.setText("");
+                picture.setImageResource(R.drawable.ic_launcher_background);
+                isPublic.setChecked(false);
             }
         });
-
-
 
 
         return view;
