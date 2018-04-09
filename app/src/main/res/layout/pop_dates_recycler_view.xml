@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="2dp"
 
-    cardView:cardBackgroundColor="@color/colorAccent"
+    cardView:cardBackgroundColor="@color/colorContentBackground"
     cardView:cardCornerRadius="5dp"
     cardView:cardUseCompatPadding="true"
     cardView:contentPadding="16dp">
@@ -24,7 +24,7 @@
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="gwefwefwef"
+                android:text="Date Name"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_weight="1"/>
@@ -44,7 +44,7 @@
                 android:id="@+id/details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Click to view more"
+                android:text="Tap to expand"
                 android:textStyle="italic" />
 
         </LinearLayout>
