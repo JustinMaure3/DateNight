@@ -81,13 +81,13 @@ public class CreateDateFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_date, container, false);
 
-        picture = (ImageView) view.findViewById(R.id.picture);
-        picture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Add code to launch the camera to upload a picture to the image view
-            }
-        });
+//        picture = (ImageView) view.findViewById(R.id.picture);
+//        picture.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //Add code to launch the camera to upload a picture to the image view
+//            }
+//        });
 
         dateName = (EditText) view.findViewById(R.id.dateName);
 
