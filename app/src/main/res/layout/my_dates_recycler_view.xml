@@ -53,13 +53,13 @@
                         tools:text="Description" />
 
                 </LinearLayout>
-
                 <ImageView
                     android:id="@+id/isPublic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     cardView:srcCompat="@mipmap/ic_launcher" />
+
             </LinearLayout>
 
         </LinearLayout>

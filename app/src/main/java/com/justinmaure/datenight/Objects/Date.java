@@ -38,6 +38,10 @@ public class Date {
         this.isFavourited = isFavourited;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getDateName() {
         return dateName;
     }

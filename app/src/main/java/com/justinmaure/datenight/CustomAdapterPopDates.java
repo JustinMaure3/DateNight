@@ -61,7 +61,7 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
 
         public CustomViewHolder(View view){
             super(view);
-            this.dateName = (TextView) view.findViewById(R.id.name);
+            this.dateName = (TextView) view.findViewById(R.id.dateName);
             this.description = (TextView) view.findViewById(R.id.description);
             this.picture = (ImageView) view.findViewById(R.id.picture);
             this.rating = (TextView) view.findViewById(R.id.rating);

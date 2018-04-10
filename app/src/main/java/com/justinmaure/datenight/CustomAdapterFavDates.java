@@ -1,6 +1,10 @@
 package com.justinmaure.datenight;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +39,24 @@ public class CustomAdapterFavDates extends RecyclerView.Adapter {
         context = parent.getContext();
 
 
+        /**
+         * This will trigger when the user taps the heart icon to favorite the date.
+         * It should:
+         * make the heart icon turn red
+         * add the date to the user's favorite dates database
+         *
+         * otherwise, it should:
+         * make the heart icon turn grey
+         * remove the date from the user's favorite dates database
+         */
+        viewHolder.isFavourited.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
+
+
         return viewHolder;
     }
 
@@ -61,11 +83,11 @@ public class CustomAdapterFavDates extends RecyclerView.Adapter {
 
         public CustomViewHolder(View view){
             super(view);
-            this.dateName = (TextView) view.findViewById(R.id.name);
+            this.dateName = (TextView) view.findViewById(R.id.dateName);
             this.description = (TextView) view.findViewById(R.id.description);
             this.picture = (ImageView) view.findViewById(R.id.picture);
             this.rating = (TextView) view.findViewById(R.id.rating);
-            this.isFavourited = (ImageView) view.findViewById(R.id.isPublic);
+            this.isFavourited = (ImageView) view.findViewById(R.id.isFavourited);
 
         }
     }
