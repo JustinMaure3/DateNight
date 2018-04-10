@@ -1,31 +1,26 @@
 package com.justinmaure.datenight;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Switch;
-
-import com.justinmaure.datenight.Objects.Date;
+import android.widget.TextView;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CreateDateFragment.OnFragmentInteractionListener} interface
+ * {@link SettingsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link CreateDateFragment#newInstance} factory method to
+ * Use the {@link SettingsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateDateFragment extends Fragment {
+public class SettingsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,16 +30,16 @@ public class CreateDateFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private ImageView picture;
-    private EditText dateName;
-    private EditText description;
-    private Switch isPublic;
-    private int isPublicNum = 0;
-    private Button submitBtn;
+    TextView usernameLabel;
+    Button forgotPasswordBtn;
+    Button changeEmailBtn;
+    Button popularFilterBtn;
+    Button recentFilterBtn;
+    Button logoutBtn;
 
     private OnFragmentInteractionListener mListener;
 
-    public CreateDateFragment() {
+    public SettingsFragment() {
         // Required empty public constructor
     }
 
@@ -54,11 +49,11 @@ public class CreateDateFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CreateDateFragment.
+     * @return A new instance of fragment SettingsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CreateDateFragment newInstance(String param1, String param2) {
-        CreateDateFragment fragment = new CreateDateFragment();
+    public static SettingsFragment newInstance(String param1, String param2) {
+        SettingsFragment fragment = new SettingsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -79,49 +74,57 @@ public class CreateDateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_create_date, container, false);
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
-//        picture = (ImageView) view.findViewById(R.id.picture);
-//        picture.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //Add code to launch the camera to upload a picture to the image view
-//            }
-//        });
+        //Username Label
+        usernameLabel = view.findViewById(R.id.usernameLabel);
+        usernameLabel.setText(MainActivity.currentUser.getUsername());
 
-        dateName = (EditText) view.findViewById(R.id.dateName);
+        //Filter the main page to show the most recent dates
+        recentFilterBtn = view.findViewById(R.id.recentFilterBtn);
 
-        description = (EditText) view.findViewById(R.id.description);
+        //Filter the main page to show the most popular dates
+        popularFilterBtn = view.findViewById(R.id.popularFilterBtn);
 
-        isPublic = (Switch) view.findViewById(R.id.isPublic);
-        isPublic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                //Add code to change the text from private to public and back
-                if (isPublic.isChecked()) {
-                    isPublic.setText("Public");
-                    isPublicNum = 1;
-                } else {
-                    isPublic.setText("Private");
-                    isPublicNum = 0;
-                }
-            }
-        });
-
-        submitBtn = (Button) view.findViewById(R.id.submitBtn);
-        submitBtn.setOnClickListener(new View.OnClickListener() {
+        //Change Email Button
+        changeEmailBtn = view.findViewById(R.id.changeEmailBtn);
+        changeEmailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Add code to grab all variables and make a new date in the date table
-                DatabaseHelper db = new DatabaseHelper(getContext());
-                db.addDate(new Date(0, dateName.getText().toString(),description.getText().toString(), picture.toString(),isPublicNum, 0, MainActivity.currentUser.getUsername(), 0));
-                db.close();
-                dateName.setText("");
-                description.setText("");
-                picture.setImageResource(R.drawable.ic_launcher_background);
-                isPublic.setChecked(false);
+                //get the user to enter their password
+
+                //User is then able to enter a new email
+
             }
         });
+
+        //Forgot Password Button
+        forgotPasswordBtn = view.findViewById(R.id.forgotPasswordBtn);
+        forgotPasswordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //mail the user their password
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto",MainActivity.currentUser.getEmail(), null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Forgotten Password");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Hello, " + MainActivity.currentUser.getUsername()
+                        + "! Here is your password for Date Night... " + MainActivity.currentUser.getPassword());
+                startActivity(Intent.createChooser(emailIntent, "Date Night"));
+            }
+        });
+
+        //Log out button
+        logoutBtn = view.findViewById(R.id.logoutBtn);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.currentUser = null;
+                //Launch the login screen
+            }
+        });
+
+
+
 
 
         return view;
