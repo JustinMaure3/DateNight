@@ -4,8 +4,10 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.SQLException;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -70,13 +72,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        DatabaseHelper db = new DatabaseHelper(getBaseContext());
-        ArrayList<User> users = db.getAllUsers();
-        for (int i = 0; i > users.size(); i++){
-            if (users.get(i).getUsername() != "admin") {
-                db.addUser(new User(0, "admin", "admin", "admin@admin.com"));
-            }
-        }
+//        DatabaseHelper db = new DatabaseHelper(getBaseContext());
+//        db.addUser(new User(0, "admin", "admin", "admin@admin.com"));
+//        db.close();
 
         if (user.getLoggedInStatus()) {
             Intent i = new Intent(LoginActivity.this, MainActivity.class);
@@ -192,13 +190,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             focusView = mUsernameView;
             cancel = true;
         } else if (!isUsernameValid(username)) {
-            mUsernameView.setError(getString(R.string.error_invalid_username));
+            mUsernameView.setError("Username is incorrect");
             focusView = mUsernameView;
             cancel = true;
         }
 
         if (!tryLogIn(username, password)){
-            mPasswordView.setError("Wrong password");
+            mPasswordView.setError("Wrong password trying to log in");
+            focusView = mPasswordView;
+            cancel = true;
         }
 
         if (cancel) {
@@ -221,12 +221,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         //TODO: Replace this with your own logic
         DatabaseHelper db = new DatabaseHelper(getBaseContext());
         ArrayList<User> users = db.getAllUsers();
-        for (int i = 0; i > users.size(); i++){
-            if (users.get(i).getUsername() == username) {
-                return false;
+        db.close();
+        for (int i = 0; i >= users.size(); i++){
+            if (username.equals(users.get(i).getUsername())) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     private boolean isPasswordValid(String password) {
@@ -235,16 +236,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean tryLogIn(String username, String password) {
-//        if (isUsernameValid(username)){
-//            if (isPasswordValid(password)) {
-//                DatabaseHelper db = new DatabaseHelper(getBaseContext());
-//                user = db.getUserByName(username);
-//                if (user.getPassword() == password) {
-//                    user.setLoggedIn(true);
-//                    return true;
-//                }
-//            }
-//        }
+        if (isUsernameValid(username)){
+            if (isPasswordValid(password)) {
+                DatabaseHelper db = new DatabaseHelper(getBaseContext());
+//                    Boolean usernameCorrect = false;
+//                    for (int i = 0; i > users.size(); i++) {
+//                        if (users.get(i).getUsername() == username){
+//                            usernameCorrect = true;
+//                        }
+//                    }
+//                    if (usernameCorrect) {
+                        user = db.getUserByName(username);
+                        if (user.getPassword() == password) {
+                            user.setLoggedIn(true);
+                            return true;
+                            //Add the user to the main activity
+                        }
+//                    } else {
+//                        //display an error message saying that the account username is incorrect
+//                    }
+                db.close();
+            }
+        }
         return false;
     }
 
