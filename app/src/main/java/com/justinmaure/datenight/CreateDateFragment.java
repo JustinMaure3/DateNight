@@ -81,7 +81,7 @@ public class CreateDateFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_date, container, false);
 
-//        picture = (ImageView) view.findViewById(R.id.picture);
+        picture = (ImageView) view.findViewById(R.id.datePicture);
 //        picture.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -91,7 +91,7 @@ public class CreateDateFragment extends Fragment {
 
         dateName = (EditText) view.findViewById(R.id.dateName);
 
-        description = (EditText) view.findViewById(R.id.description);
+        description = (EditText) view.findViewById(R.id.dateDescription);
 
         isPublic = (Switch) view.findViewById(R.id.isPublic);
         isPublic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -114,7 +114,8 @@ public class CreateDateFragment extends Fragment {
             public void onClick(View view) {
                 //Add code to grab all variables and make a new date in the date table
                 DatabaseHelper db = new DatabaseHelper(getContext());
-                db.addDate(new Date(0, dateName.getText().toString(),description.getText().toString(), picture.toString(),isPublicNum, 0, MainActivity.currentUser.getUsername(), 0));
+                db.addDate(new Date(dateName.getText().toString(),description.getText().toString(), picture.getDrawable().toString(),isPublicNum, 0, MainActivity.currentUser.getUsername(), 0));
+//                db.addDate(new Date("date name", "description", "R.drawable.ic_add_circle_black_24dp".toString() , 0, 0, "meee", 0));
                 db.close();
                 dateName.setText("");
                 description.setText("");

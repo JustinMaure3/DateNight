@@ -34,7 +34,7 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, final int viewType){
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.pop_dates_recycler_view, parent, false);
+                .inflate(R.layout.my_dates_recycler_view, parent, false);
         final CustomViewHolder viewHolder = new CustomViewHolder(view);
         context = parent.getContext();
 

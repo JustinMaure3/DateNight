@@ -53,9 +53,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String CREATE_DATE_TABLE = "CREATE TABLE " +
             TABLE_DATE + "(" + COLUMN_ID + " INTEGER PRIMARY KEY,"
             + COLUMN_DATE_NAME + " TEXT," + COLUMN_DESCRIPTION + " TEXT,"
-            + COLUMN_PICTURE + " TEXT," + COLUMN_IS_PUBLIC + " TEXT,"
-            + COLUMN_RATING + " TEXT," + COLUMN_CREATOR_NAME + " TEXT,"
-            + COLUMN_IS_FAVOURITED + " TEXT)";
+            + COLUMN_PICTURE + " TEXT," + COLUMN_IS_PUBLIC + " INT,"
+            + COLUMN_RATING + " INT," + COLUMN_CREATOR_NAME + " TEXT,"
+            + COLUMN_IS_FAVOURITED + " INT)";
 
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null , DATABASE_VERSION);
@@ -154,7 +154,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_RATING, date.getRating());
         values.put(COLUMN_CREATOR_NAME, date.getCreatorName());
         values.put(COLUMN_IS_FAVOURITED, date.getFavourited());
-        db.insert(TABLE_USER, null, values);
+        db.insert(TABLE_DATE, null, values);
         db.close();
     }
     //Read

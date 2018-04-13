@@ -57,7 +57,7 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
         protected TextView description;
         protected TextView rating;
         protected ImageView picture;
-        protected ImageView isPublic;
+        protected ImageView isFavourited;
 
         public CustomViewHolder(View view){
             super(view);
@@ -65,8 +65,7 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
             this.description = (TextView) view.findViewById(R.id.description);
             this.picture = (ImageView) view.findViewById(R.id.picture);
             this.rating = (TextView) view.findViewById(R.id.rating);
-            this.isPublic = (ImageView) view.findViewById(R.id.isPublic);
-
+            this.isFavourited = (ImageView) view.findViewById(R.id.isFavourited);
         }
     }
 }
