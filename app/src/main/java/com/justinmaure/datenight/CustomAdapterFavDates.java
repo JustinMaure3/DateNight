@@ -52,7 +52,12 @@ public class CustomAdapterFavDates extends RecyclerView.Adapter {
         viewHolder.isFavourited.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+//                viewHolder.isFavourited.getColorFilter()
+//                picture.setImageResource(R.drawable.ic_launcher_background);
+//                int location = viewHolder.getAdapterPosition();
+//                DatabaseHelper db = new DatabaseHelper(context);
+//                db.deleteDate(dates.get(location).getId());
+//                dates.remove(location);
             }
         });
 
