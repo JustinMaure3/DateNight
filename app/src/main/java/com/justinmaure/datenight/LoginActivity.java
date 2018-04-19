@@ -162,9 +162,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
 
         // Reset errors.
         mUsernameView.setError(null);
@@ -212,7 +209,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         DatabaseHelper db = new DatabaseHelper(getBaseContext());
         ArrayList<User> users = db.getAllUsers();
         db.close();
-        for (int i = 0; i <= users.size(); i++){
+        for (int i = 0; i < users.size(); i++){
             if (username.equals(users.get(i).getUsername())) {
                 return true;
             }
