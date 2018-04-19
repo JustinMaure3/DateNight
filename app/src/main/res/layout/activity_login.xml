@@ -65,11 +65,20 @@
 
             <Button
                 android:id="@+id/username_sign_in_button"
-                style="?android:textAppearanceSmall"
+                style="@style/Widget.AppCompat.Button.Small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Sign In"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/sign_up_button"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Sign Up"
                 android:textStyle="bold" />
 
         </LinearLayout>

@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         SearchFragment.OnFragmentInteractionListener {
 
 
-    public static User currentUser = new User("Test","Test","Test@gmail.com");
+    public static User currentUser = LoginActivity.user;
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
