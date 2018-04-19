@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.justinmaure.datenight.Objects.User;
+import com.justinmaure.datenight.Objects.Date;
 
 import java.util.ArrayList;
 
@@ -34,12 +35,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_EMAIL = "email";
 
     //Date table column names
+    public static final String COLUMN_DATE_NAME = "dateName";
+    public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_PICTURE = "picture";
+    public static final String COLUMN_IS_PUBLIC = "isPublic";
+    public static final String COLUMN_RATING = "rating";
+    public static final String COLUMN_CREATOR_NAME = "creatorName";
+    public static final String COLUMN_IS_FAVOURITED = "isFavourited";
 
-    //Create statements for our tables
+    //Create statement for user table
     public static final String CREATE_USER_TABLE = "CREATE TABLE " +
             TABLE_USER + "(" + COLUMN_ID + " INTEGER PRIMARY KEY,"
             + COLUMN_USERNAME + " TEXT," + COLUMN_PASSWORD + " TEXT,"
             + COLUMN_EMAIL + " TEXT)";
+
+    //Create statement for date table
+    public static final String CREATE_DATE_TABLE = "CREATE TABLE " +
+            TABLE_DATE + "(" + COLUMN_ID + " INTEGER PRIMARY KEY,"
+            + COLUMN_DATE_NAME + " TEXT," + COLUMN_DESCRIPTION + " TEXT,"
+            + COLUMN_PICTURE + " TEXT," + COLUMN_IS_PUBLIC + " INT,"
+            + COLUMN_RATING + " INT," + COLUMN_CREATOR_NAME + " TEXT,"
+            + COLUMN_IS_FAVOURITED + " INT)";
 
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null , DATABASE_VERSION);
@@ -48,14 +64,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USER_TABLE);
+        db.execSQL(CREATE_DATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DATE);
     }
 
     // USER CRUD OPERATIONS
+
     //Create
     public void addUser(User user){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -121,6 +140,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return userList;
     }
     //Update
+    public int updateUser(User user){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USERNAME, user.getUsername());
+        values.put(COLUMN_PASSWORD, user.getPassword());
+        values.put(COLUMN_EMAIL, user.getEmail());
+        return db.update(TABLE_USER, values, COLUMN_ID + "= ?",
+                new String[]{String.valueOf(user.getId())});
+    }
 
     //Delete
     public void deleteUser(int user){
@@ -130,13 +158,77 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+
     //DATE CRUD OPERATIONS
+
     //Create
-
+    public void addDate(Date date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DATE_NAME, date.getDateName());
+        values.put(COLUMN_DESCRIPTION, date.getDescription());
+        values.put(COLUMN_PICTURE, date.getPicture());
+        values.put(COLUMN_IS_PUBLIC, date.getPublic());
+        values.put(COLUMN_RATING, date.getRating());
+        values.put(COLUMN_CREATOR_NAME, date.getCreatorName());
+        values.put(COLUMN_IS_FAVOURITED, date.getFavourited());
+        db.insert(TABLE_DATE, null, values);
+        db.close();
+    }
     //Read
+    public Date getDate(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Date date = null;
+        Cursor cursor = db.query(TABLE_DATE,
+                new String[]{COLUMN_ID, COLUMN_DATE_NAME, COLUMN_DESCRIPTION, COLUMN_PICTURE,
+                COLUMN_IS_PUBLIC, COLUMN_RATING, COLUMN_CREATOR_NAME, COLUMN_IS_FAVOURITED},
+                COLUMN_ID + "=?", new String[]{String.valueOf(id)},
+                null, null, null, null);
+        if(cursor != null){
+            cursor.moveToFirst();
 
+            date = new Date(Integer.parseInt(cursor.getString(0)),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getInt(4),
+                    cursor.getInt(5),
+                    cursor.getString(6),
+                    cursor.getInt(7));
+        }
+        db.close();
+        return date;
+    }
+
+    public ArrayList<Date> getAllDates(){
+        ArrayList<Date> dateList = new ArrayList<Date>();
+        String query = "SELECT * FROM " + TABLE_DATE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            do{
+                dateList.add(new Date(Integer.parseInt(cursor.getString(0)),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getInt(4),
+                        cursor.getInt(5),
+                        cursor.getString(6),
+                        cursor.getInt(7)));
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        return dateList;
+    }
     //Update
 
     //Delete
+    public void deleteDate(int date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_DATE, COLUMN_ID + " = ?",
+                new String[]{String.valueOf(date)});
+        db.close();
+    }
 
 }

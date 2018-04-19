@@ -8,12 +8,17 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.justinmaure.datenight.Objects.User;
+
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
         MainFragment.OnFragmentInteractionListener,
         MyDatesFragment.OnFragmentInteractionListener,
         FavoriteDateFragment.OnFragmentInteractionListener,
         CreateDateFragment.OnFragmentInteractionListener,
         SearchFragment.OnFragmentInteractionListener {
+
+
+    public static User currentUser = new User("Test","Test","Test@gmail.com");
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {

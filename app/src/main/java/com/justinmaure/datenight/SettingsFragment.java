@@ -1,30 +1,26 @@
 package com.justinmaure.datenight;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.justinmaure.datenight.Objects.Date;
-
-import java.util.ArrayList;
+import android.widget.Button;
+import android.widget.TextView;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MainFragment.OnFragmentInteractionListener} interface
+ * {@link SettingsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MainFragment#newInstance} factory method to
+ * Use the {@link SettingsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragment extends Fragment {
+public class SettingsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,9 +30,16 @@ public class MainFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    TextView usernameLabel;
+    Button forgotPasswordBtn;
+    Button changeEmailBtn;
+    Button popularFilterBtn;
+    Button recentFilterBtn;
+    Button logoutBtn;
+
     private OnFragmentInteractionListener mListener;
 
-    public MainFragment() {
+    public SettingsFragment() {
         // Required empty public constructor
     }
 
@@ -46,11 +49,11 @@ public class MainFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MainFragment.
+     * @return A new instance of fragment SettingsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MainFragment newInstance(String param1, String param2) {
-        MainFragment fragment = new MainFragment();
+    public static SettingsFragment newInstance(String param1, String param2) {
+        SettingsFragment fragment = new SettingsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -70,23 +73,60 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
-        RecyclerView list = view.findViewById(R.id.popularDatesList);
-        DatabaseHelper db = new DatabaseHelper(getContext());
-        ArrayList<Date> dates = db.getAllDates();
-        db.close();
-        CustomAdapterFavDates adapter = new CustomAdapterFavDates(dates);
-        list.setAdapter(adapter);
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        LinearLayoutManager layoutManager =
-                new LinearLayoutManager(getContext()){
-                    @Override
-                    public boolean supportsPredictiveItemAnimations() {
-                        return true;
-                    }
-                };
-        list.setLayoutManager(layoutManager);
-        list.setItemAnimator(new DefaultItemAnimator());
+        //Username Label
+        usernameLabel = view.findViewById(R.id.usernameLabel);
+        usernameLabel.setText(MainActivity.currentUser.getUsername());
+
+        //Filter the main page to show the most recent dates
+        recentFilterBtn = view.findViewById(R.id.recentFilterBtn);
+
+        //Filter the main page to show the most popular dates
+        popularFilterBtn = view.findViewById(R.id.popularFilterBtn);
+
+        //Change Email Button
+        changeEmailBtn = view.findViewById(R.id.changeEmailBtn);
+        changeEmailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //get the user to enter their password
+
+                //User is then able to enter a new email
+
+            }
+        });
+
+        //Forgot Password Button
+        forgotPasswordBtn = view.findViewById(R.id.forgotPasswordBtn);
+        forgotPasswordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //mail the user their password
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto",MainActivity.currentUser.getEmail(), null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Forgotten Password");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Hello, " + MainActivity.currentUser.getUsername()
+                        + "! Here is your password for Date Night... " + MainActivity.currentUser.getPassword());
+                startActivity(Intent.createChooser(emailIntent, "Date Night"));
+            }
+        });
+
+        //Log out button
+        logoutBtn = view.findViewById(R.id.logoutBtn);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.currentUser = null;
+                //Launch the login screen
+            }
+        });
+
+
+
+
+
         return view;
     }
 

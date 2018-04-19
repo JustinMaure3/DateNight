@@ -1,12 +1,21 @@
 package com.justinmaure.datenight;
 
 import android.content.Context;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.justinmaure.datenight.Objects.Date;
+
+import java.util.ArrayList;
+
 
 
 /**
@@ -63,8 +72,24 @@ public class MyDatesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_dates, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_dates, container, false);
+        RecyclerView list = view.findViewById(R.id.myDatesList);
+        DatabaseHelper db = new DatabaseHelper(getContext());
+        ArrayList<Date> dates = db.getAllDates();
+        db.close();
+        CustomAdapterMyDates adapter = new CustomAdapterMyDates(dates);
+        list.setAdapter(adapter);
+
+        LinearLayoutManager layoutManager =
+                new LinearLayoutManager(getContext()){
+                    @Override
+                    public boolean supportsPredictiveItemAnimations() {
+                        return true;
+                    }
+                };
+        list.setLayoutManager(layoutManager);
+        list.setItemAnimator(new DefaultItemAnimator());
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,4 +130,6 @@ public class MyDatesFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }

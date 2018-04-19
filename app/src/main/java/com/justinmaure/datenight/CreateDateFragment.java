@@ -4,9 +4,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Switch;
+
+import com.justinmaure.datenight.Objects.Date;
 
 
 /**
@@ -26,6 +34,13 @@ public class CreateDateFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ImageView picture;
+    private EditText dateName;
+    private EditText description;
+    private Switch isPublic;
+    private int isPublicNum = 0;
+    private Button submitBtn;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,7 +79,53 @@ public class CreateDateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_date, container, false);
+        View view = inflater.inflate(R.layout.fragment_create_date, container, false);
+
+        picture = (ImageView) view.findViewById(R.id.datePicture);
+//        picture.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //Add code to launch the camera to upload a picture to the image view
+//            }
+//        });
+
+        dateName = (EditText) view.findViewById(R.id.dateName);
+
+        description = (EditText) view.findViewById(R.id.dateDescription);
+
+        isPublic = (Switch) view.findViewById(R.id.isPublic);
+        isPublic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                //Add code to change the text from private to public and back
+                if (isPublic.isChecked()) {
+                    isPublic.setText("Public");
+                    isPublicNum = 1;
+                } else {
+                    isPublic.setText("Private");
+                    isPublicNum = 0;
+                }
+            }
+        });
+
+        submitBtn = (Button) view.findViewById(R.id.submitBtn);
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Add code to grab all variables and make a new date in the date table
+                DatabaseHelper db = new DatabaseHelper(getContext());
+                db.addDate(new Date(dateName.getText().toString(),description.getText().toString(), picture.getDrawable().toString(),isPublicNum, 0, MainActivity.currentUser.getUsername(), 0));
+//                db.addDate(new Date("date name", "description", "R.drawable.ic_add_circle_black_24dp".toString() , 0, 0, "meee", 0));
+                db.close();
+                dateName.setText("");
+                description.setText("");
+                picture.setImageResource(R.drawable.ic_launcher_background);
+                isPublic.setChecked(false);
+            }
+        });
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
