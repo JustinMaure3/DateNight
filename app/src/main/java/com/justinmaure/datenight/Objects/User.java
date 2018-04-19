@@ -1,5 +1,7 @@
 package com.justinmaure.datenight.Objects;
 
+import java.util.ArrayList;
+
 /**
  * Created by IceOf on 2018-03-27.
  */
@@ -10,6 +12,8 @@ public class User {
     private String password;
     private String email;
     private Boolean isLoggedIn = false;
+
+    private ArrayList<Date> favoritedDates = new ArrayList<Date>();
 
     public User(){
 
@@ -66,5 +70,17 @@ public class User {
 
     public void setLoggedIn(Boolean loggedIn) {
         isLoggedIn = loggedIn;
+    }
+
+    public ArrayList<Date> getFavoritedDates(){
+        return this.favoritedDates;
+    }
+
+    public void addToFavorites(Date date) {
+        this.favoritedDates.add(date);
+    }
+
+    public void removeFromFavorites(Date date) {
+        this.favoritedDates.remove(date);
     }
 }

@@ -72,10 +72,8 @@ public class FavoriteDateFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_date, container, false);
         RecyclerView list = view.findViewById(R.id.favouriteDatesList);
-        DatabaseHelper db = new DatabaseHelper(getContext());
-        ArrayList<Date> dates = db.getAllDates();
-        db.close();
-        CustomAdapterFavDates adapter = new CustomAdapterFavDates(dates);
+
+        CustomAdapterFavDates adapter = new CustomAdapterFavDates(MainActivity.currentUser.getFavoritedDates());
         list.setAdapter(adapter);
 
         LinearLayoutManager layoutManager =

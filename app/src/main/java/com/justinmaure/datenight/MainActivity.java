@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
 
-        loadFragment(new MainFragment());
+        //This will change to main fragment later
+        loadFragment(new MyDatesFragment());
         //Use if statement to check if user is logged in. if not send them to the login page. if so then launch main fragment
     }
 
