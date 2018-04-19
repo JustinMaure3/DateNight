@@ -73,10 +73,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        DatabaseHelper db = new DatabaseHelper(getBaseContext());
-//        db.addUser(new User(0, "admin", "admin", "admin@admin.com"));
-//        db.close();
-
         if (user.getLoggedInStatus()) {
             Intent i = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(i);
