@@ -3,6 +3,7 @@ package com.justinmaure.datenight;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
@@ -80,12 +81,13 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 MainActivity activity = (MainActivity) context;
                 int location = viewHolder.getAdapterPosition();
+
                 FragmentManager fm = activity.getSupportFragmentManager();
                 FragmentTransaction transaction = fm.beginTransaction();
-//                transaction.replace(R.id.content,
-//                        UpdateDateFragment.newInstance(dates.get(location)));
+//                transaction.replace(R.id.content, UpdateDateFragment.newInstance(dates.get(location));
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
@@ -98,6 +100,7 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Date date = dates.get(position);
         ((CustomViewHolder) holder).dateName.setText(date.getDateName());
+        ((CustomViewHolder) holder).description.setText(date.getDescription());
     }
 
     @Override
