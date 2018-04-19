@@ -84,8 +84,8 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
                 int location = viewHolder.getAdapterPosition();
                 FragmentManager fm = activity.getSupportFragmentManager();
                 FragmentTransaction transaction = fm.beginTransaction();
-//                transaction.replace(R.id.content,
-//                        UpdateDateFragment.newInstance(dates.get(location)));
+                transaction.replace(R.id.content,
+                        UpdateDateFragment.newInstance(dates.get(location)));
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
