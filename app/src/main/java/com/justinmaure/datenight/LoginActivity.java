@@ -174,46 +174,36 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
 
-        boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
-        // Check for a valid username
-        if (TextUtils.isEmpty(username)) {
-            mUsernameView.setError(getString(R.string.error_field_required));
-            focusView = mUsernameView;
-            cancel = true;
-        } else if (!isUsernameValid(username)) {
-            mUsernameView.setError("Username is incorrect");
-            focusView = mUsernameView;
-            cancel = true;
-        }
-
-        if (!tryLogIn(username, password)){
-            mPasswordView.setError("Wrong password trying to log in");
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
+        if (isUsernameValid(username) && !TextUtils.isEmpty(username)){
+            if (isPasswordValid(password) && !TextUtils.isEmpty(password)) {
+                DatabaseHelper db = new DatabaseHelper(getBaseContext());
+                user = db.getUserByName(username);
+                if (user.getPassword().equals(password)) {
+                    user.setLoggedIn(true);
+                    //Add the user to the main activity
+                    showProgress(true);
+                    mAuthTask = new UserLoginTask(username, password);
+                    mAuthTask.execute((Void) null);
+                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(i);
+                    finish();
+                } else {
+                    mPasswordView.setError("Incorrect Password");
+                    focusView = mPasswordView;
+                    focusView.requestFocus();
+                }
+                db.close();
+            } else {
+                mPasswordView.setError("Invalid Password");
+                focusView = mPasswordView;
+                focusView.requestFocus();
+            }
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(username, password);
-            mAuthTask.execute((Void) null);
-            Intent i = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(i);
-            finish();
+            mUsernameView.setError("Incorrect Username");
+            focusView = mUsernameView;
+            focusView.requestFocus();
         }
     }
 
@@ -222,7 +212,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         DatabaseHelper db = new DatabaseHelper(getBaseContext());
         ArrayList<User> users = db.getAllUsers();
         db.close();
-        for (int i = 0; i >= users.size(); i++){
+        for (int i = 0; i <= users.size(); i++){
             if (username.equals(users.get(i).getUsername())) {
                 return true;
             }
@@ -233,32 +223,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
-    }
-
-    private boolean tryLogIn(String username, String password) {
-        if (isUsernameValid(username)){
-            if (isPasswordValid(password)) {
-                DatabaseHelper db = new DatabaseHelper(getBaseContext());
-//                    Boolean usernameCorrect = false;
-//                    for (int i = 0; i > users.size(); i++) {
-//                        if (users.get(i).getUsername() == username){
-//                            usernameCorrect = true;
-//                        }
-//                    }
-//                    if (usernameCorrect) {
-                        user = db.getUserByName(username);
-                        if (user.getPassword() == password) {
-                            user.setLoggedIn(true);
-                            return true;
-                            //Add the user to the main activity
-                        }
-//                    } else {
-//                        //display an error message saying that the account username is incorrect
-//                    }
-                db.close();
-            }
-        }
-        return false;
     }
 
     /**
