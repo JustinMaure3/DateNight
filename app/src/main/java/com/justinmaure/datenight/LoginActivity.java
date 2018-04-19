@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.database.SQLException;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -62,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
-    private User user = new User();
+    public static User user = new User();
 
     // UI references.
     private AutoCompleteTextView mUsernameView;
@@ -104,6 +105,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 @Override
                 public void onClick(View view) {
                     attemptLogin();
+                }
+            });
+
+            Button mSignUpButton = (Button) findViewById(R.id.sign_up_button);
+            mSignUpButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
+                    startActivity(i);
+                    finish();
                 }
             });
 
