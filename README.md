@@ -13,3 +13,5 @@ With the DateNight app, users will be able to create and store their date ideas.
 ![alt text](https://github.com/JustinMaure3/DateNight/blob/master/App%20Screenshots/Create%20Date.png)
 
 ![alt text](https://github.com/JustinMaure3/DateNight/blob/master/App%20Screenshots/My%20Dates.png)
+
+![alt text](https://github.com/JustinMaure3/DateNight/blob/master/App%20Screenshots/DateNight%20App%20Icon.png)
