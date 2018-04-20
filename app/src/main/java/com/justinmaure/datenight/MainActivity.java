@@ -15,7 +15,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         MyDatesFragment.OnFragmentInteractionListener,
         FavoriteDateFragment.OnFragmentInteractionListener,
         CreateDateFragment.OnFragmentInteractionListener,
-        SearchFragment.OnFragmentInteractionListener {
+        SearchFragment.OnFragmentInteractionListener,
+        UpdateDateFragment.OnFragmentInteractionListener{
 
 
     public static User currentUser = LoginActivity.user;

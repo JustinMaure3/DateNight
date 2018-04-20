@@ -40,10 +40,6 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
         context = parent.getContext();
 
         /**
-         * Needs revising. Make sure to fully understand how this works before moving on
-         * Need to make the long click delete a date, with the delete confirmation
-         * regular click will allow the user to edit the date
-         * there will not be any favoriting since it's the user's own date ideas.
          * Figure out what the rating thing will be for the user's dates
          */
 
@@ -83,11 +79,14 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
             public void onClick(View v) {
 
                 MainActivity activity = (MainActivity) context;
+
                 int location = viewHolder.getAdapterPosition();
+
+                //code generate parcelable
 
                 FragmentManager fm = activity.getSupportFragmentManager();
                 FragmentTransaction transaction = fm.beginTransaction();
-//                transaction.replace(R.id.content, UpdateDateFragment.newInstance(dates.get(location));
+                transaction.replace(R.id.content, UpdateDateFragment.newInstance(dates.get(location)));
                 transaction.addToBackStack(null);
                 transaction.commit();
             }

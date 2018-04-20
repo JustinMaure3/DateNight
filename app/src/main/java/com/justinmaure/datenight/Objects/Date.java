@@ -1,10 +1,13 @@
 package com.justinmaure.datenight.Objects;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Max on 3/28/18.
  */
 
-public class Date {
+public class Date implements Parcelable {
     private Integer id;
     private String dateName;
     private String description;
@@ -96,5 +99,23 @@ public class Date {
 
     public void setFavourited(Integer favourited) {
         isFavourited = favourited;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(this.id);
+        parcel.writeString(this.dateName);
+        parcel.writeString(this.description);
+        parcel.writeString(this.picture);
+        parcel.writeInt(this.isPublic);
+        parcel.writeInt(this.isFavourited);
+        parcel.writeString(this.creatorName);
+        parcel.writeInt(this.rating);
     }
 }
