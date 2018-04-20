@@ -15,10 +15,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         MyDatesFragment.OnFragmentInteractionListener,
         FavoriteDateFragment.OnFragmentInteractionListener,
         CreateDateFragment.OnFragmentInteractionListener,
-        SearchFragment.OnFragmentInteractionListener {
+        SearchFragment.OnFragmentInteractionListener,
+        UpdateDateFragment.OnFragmentInteractionListener{
 
 
-    public static User currentUser = new User("Test","Test","Test@gmail.com");
+    public static User currentUser = LoginActivity.user;
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
@@ -36,7 +37,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
 
-        loadFragment(new MainFragment());
+        //This will change to main fragment later
+        loadFragment(new MyDatesFragment());
         //Use if statement to check if user is logged in. if not send them to the login page. if so then launch main fragment
     }
 

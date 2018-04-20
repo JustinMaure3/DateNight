@@ -1,17 +1,17 @@
 package com.justinmaure.datenight;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
-import com.justinmaure.datenight.Objects.Date;
+import com.justinmaure.datenight.Objects.User;
 
 import java.util.ArrayList;
 
@@ -19,12 +19,12 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FavoriteDateFragment.OnFragmentInteractionListener} interface
+ * {@link RegisterFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FavoriteDateFragment#newInstance} factory method to
+ * Use the {@link RegisterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FavoriteDateFragment extends Fragment {
+public class RegisterFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,9 +34,15 @@ public class FavoriteDateFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private EditText usernameField;
+    private EditText emailField;
+    private EditText passwordField1;
+    private EditText passwordField2;
+    private Button registerBtn;
+
     private OnFragmentInteractionListener mListener;
 
-    public FavoriteDateFragment() {
+    public RegisterFragment() {
         // Required empty public constructor
     }
 
@@ -46,11 +52,11 @@ public class FavoriteDateFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FavoriteDateFragment.
+     * @return A new instance of fragment RegisterFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FavoriteDateFragment newInstance(String param1, String param2) {
-        FavoriteDateFragment fragment = new FavoriteDateFragment();
+    public static RegisterFragment newInstance(String param1, String param2) {
+        RegisterFragment fragment = new RegisterFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -70,21 +76,44 @@ public class FavoriteDateFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_favorite_date, container, false);
-        RecyclerView list = view.findViewById(R.id.favouriteDatesList);
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_register, container, false);
 
-        CustomAdapterFavDates adapter = new CustomAdapterFavDates(MainActivity.currentUser.getFavoritedDates());
-        list.setAdapter(adapter);
+        usernameField = (EditText) view.findViewById(R.id.UsernameField);
+        emailField = (EditText) view.findViewById(R.id.EmailField);
+        passwordField1 = (EditText) view.findViewById(R.id.PasswordField1);
+        passwordField2 = (EditText) view.findViewById(R.id.PasswordField2);
+        registerBtn = (Button) view.findViewById(R.id.registerBtn);
+        registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isUsernameValid(usernameField.getText().toString())){
+                    if (isEmailValid(emailField.getText().toString())) {
+                        if (passwordField1.getText().toString() == passwordField2.getText().toString()) {
+                            DatabaseHelper db = new DatabaseHelper(getContext());
+                            db.addUser(new User(0, usernameField.getText().toString(),
+                                    emailField.getText().toString(), passwordField1.getText().toString()));
+                            db.close();
+                            Intent i = new Intent(getContext(), LoginActivity.class);
+                            startActivity(i);
 
-        LinearLayoutManager layoutManager =
-                new LinearLayoutManager(getContext()){
-                    @Override
-                    public boolean supportsPredictiveItemAnimations() {
-                        return true;
+                        } else {
+                            passwordField1.setError("This password doesn't match the second");
+                            passwordField2.setError("This password doesn't match the first");
+                        }
+
+                    } else {
+                        emailField.setError("This is not a valid email");
                     }
-                };
-        list.setLayoutManager(layoutManager);
-        list.setItemAnimator(new DefaultItemAnimator());
+                } else {
+                    usernameField.setError("This username has already been taken");
+                }
+            }
+        });
+
+
+
+
         return view;
     }
 
@@ -125,5 +154,24 @@ public class FavoriteDateFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public Boolean isUsernameValid(String username) {
+        DatabaseHelper db = new DatabaseHelper(getContext());
+        ArrayList<User> users = db.getAllUsers();
+        db.close();
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUsername() == username){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public Boolean isEmailValid(String email) {
+        if (email.indexOf('@') == -1) {
+            return false;
+        }
+        return true;
     }
 }

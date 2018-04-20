@@ -104,6 +104,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return user;
     }
 
+    public User getUserByName(String username){
+        SQLiteDatabase db = this.getReadableDatabase();
+        User user = null;
+        Cursor cursor = db.query(TABLE_USER,
+                new String[]{COLUMN_ID, COLUMN_USERNAME, COLUMN_PASSWORD, COLUMN_EMAIL},
+                COLUMN_USERNAME + "=?", new String[]{String.valueOf(username)},
+                null, null, null, null);
+        if(cursor != null){
+            cursor.moveToFirst();
+            user = new User(Integer.parseInt(cursor.getString(0)),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3));
+        }
+        db.close();
+        return user;
+    }
+
     public ArrayList<User> getAllUsers(){
         ArrayList<User> userList = new ArrayList<User>();
         String query = "SELECT * FROM " + TABLE_USER;
@@ -203,7 +221,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return dateList;
     }
-    //Update
+
+//Update
+    public int updateDate(Date date){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DATE_NAME, date.getDateName());
+        values.put(COLUMN_DESCRIPTION, date.getDescription());
+        values.put(COLUMN_PICTURE, date.getPicture());
+        values.put(COLUMN_IS_PUBLIC, date.getPublic());
+        values.put(COLUMN_RATING, date.getRating());
+        values.put(COLUMN_CREATOR_NAME, date.getCreatorName());
+        values.put(COLUMN_IS_FAVOURITED, date.getFavourited());
+
+        return db.update(TABLE_DATE, values, COLUMN_ID + "= ?",
+                new String[]{String.valueOf(date.getId())});
+    }
 
     //Delete
     public void deleteDate(int date){

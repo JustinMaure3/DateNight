@@ -77,7 +77,13 @@ public class MyDatesFragment extends Fragment {
         DatabaseHelper db = new DatabaseHelper(getContext());
         ArrayList<Date> dates = db.getAllDates();
         db.close();
-        CustomAdapterMyDates adapter = new CustomAdapterMyDates(dates);
+        ArrayList<Date> updatedDates = new ArrayList<Date>();
+        for (int i = 0; i < dates.size(); i++) {
+            if (dates.get(i).getCreatorName().equals(MainActivity.currentUser.getUsername())) {
+                updatedDates.add(dates.get(i));
+            }
+        }
+        CustomAdapterMyDates adapter = new CustomAdapterMyDates(updatedDates);
         list.setAdapter(adapter);
 
         LinearLayoutManager layoutManager =
