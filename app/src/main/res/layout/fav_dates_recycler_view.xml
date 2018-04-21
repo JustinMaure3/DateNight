@@ -55,11 +55,13 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/isFavourited"
+                    android:id="@+id/favourited"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    cardView:srcCompat="@mipmap/ic_launcher" />
+                    android:minHeight="75dp"
+                    android:minWidth="75dp"
+                    cardView:srcCompat="@drawable/ic_favorite_black_24dp" />
             </LinearLayout>
 
         </LinearLayout>

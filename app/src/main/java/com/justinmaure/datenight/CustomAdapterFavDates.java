@@ -52,6 +52,12 @@ public class CustomAdapterFavDates extends RecyclerView.Adapter {
         viewHolder.isFavourited.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                int location = viewHolder.getAdapterPosition();
+
+                if (dates.get(location).getFavourited() == 1){
+
+                }
 //                viewHolder.isFavourited.getColorFilter()
 //                picture.setImageResource(R.drawable.ic_launcher_background);
 //                int location = viewHolder.getAdapterPosition();
@@ -92,7 +98,7 @@ public class CustomAdapterFavDates extends RecyclerView.Adapter {
             this.description = (TextView) view.findViewById(R.id.description);
             this.picture = (ImageView) view.findViewById(R.id.picture);
             this.rating = (TextView) view.findViewById(R.id.rating);
-            this.isFavourited = (ImageView) view.findViewById(R.id.isFavourited);
+            this.isFavourited = (ImageView) view.findViewById(R.id.favourited);
 
         }
     }

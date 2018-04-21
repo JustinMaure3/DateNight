@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.justinmaure.datenight.Objects.Date;
+import com.justinmaure.datenight.Objects.User;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 
 public class CustomAdapterPopDates extends RecyclerView.Adapter {
     private ArrayList<Date> dates;
-
+    private ArrayList<User> users;
 
     Context context;
 
@@ -30,9 +31,27 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, final int viewType){
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.pop_dates_recycler_view, parent, false);
+                .inflate(R.layout.fav_dates_recycler_view, parent, false);
         final CustomAdapterPopDates.CustomViewHolder viewHolder = new CustomAdapterPopDates.CustomViewHolder(view);
         context = parent.getContext();
+
+
+        viewHolder.favourited.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int location = viewHolder.getAdapterPosition();
+
+                User user = users.get(location);
+
+                if (dates.get(location).getFavourited() == 1){
+                    user.removeFromFavorites(dates.get(location));
+                    viewHolder.favourited.setImageResource(R.drawable.ic_favorite_black_24dp);
+                }else{
+                    user.addToFavorites(dates.get(location));
+                    viewHolder.favourited.setImageResource(R.drawable.ic_add_circle_black_24dp);
+                }
+            }
+        });
 
 
         return viewHolder;
@@ -57,7 +76,7 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
         protected TextView description;
         protected TextView rating;
         protected ImageView picture;
-        protected ImageView isFavourited;
+        protected ImageView favourited;
 
         public CustomViewHolder(View view){
             super(view);
@@ -65,7 +84,7 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
             this.description = (TextView) view.findViewById(R.id.description);
             this.picture = (ImageView) view.findViewById(R.id.picture);
             this.rating = (TextView) view.findViewById(R.id.rating);
-            this.isFavourited = (ImageView) view.findViewById(R.id.isFavourited);
+            this.favourited = (ImageView) view.findViewById(R.id.favourited);
         }
     }
 }
