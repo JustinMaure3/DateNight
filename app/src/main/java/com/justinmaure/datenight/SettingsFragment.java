@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,19 +86,29 @@ public class SettingsFragment extends Fragment {
 
         //Filter the main page to show the most recent dates
         recentFilterBtn = view.findViewById(R.id.recentFilterBtn);
+        recentFilterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainFragment.filter = 0;
+                MainActivity.navigation.setSelectedItemId(R.id.navigation_main);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, new MainFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
 
         //Filter the main page to show the most popular dates
         popularFilterBtn = view.findViewById(R.id.popularFilterBtn);
-
-        //Change Email Button
-        changeEmailBtn = view.findViewById(R.id.changeEmailBtn);
-        changeEmailBtn.setOnClickListener(new View.OnClickListener() {
+        popularFilterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //get the user to enter their password
-
-                //User is then able to enter a new email
-
+                MainFragment.filter = 1;
+                MainActivity.navigation.setSelectedItemId(R.id.navigation_main);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, new MainFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 

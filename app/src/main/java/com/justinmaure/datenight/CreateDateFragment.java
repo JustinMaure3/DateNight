@@ -124,6 +124,7 @@ public class CreateDateFragment extends Fragment {
                 description.setText("");
                 picture.setImageResource(R.drawable.ic_launcher_background);
                 isPublic.setChecked(false);
+                MainActivity.navigation.setSelectedItemId(R.id.navigation_my_dates);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content, new MyDatesFragment());
                 transaction.addToBackStack(null);

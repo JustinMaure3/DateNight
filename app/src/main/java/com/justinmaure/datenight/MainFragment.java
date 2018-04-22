@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.justinmaure.datenight.Objects.Date;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 
 /**
@@ -29,10 +30,12 @@ public class MainFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static int filter = 0;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -76,11 +79,35 @@ public class MainFragment extends Fragment {
         ArrayList<Date> dates = db.getAllDates();
         db.close();
         ArrayList<Date> updatedDates = new ArrayList<Date>();
-        for (int i = 0; i < dates.size(); i++) {
-            if (dates.get(i).getPublic().equals(1)) {
-                updatedDates.add(dates.get(i));
-            }
+        switch (filter){
+            case 0:
+                //Filter the most recent
+                updatedDates.clear();
+                for (int i = 0; i < dates.size(); i++) {
+                    if (dates.get(i).getPublic().equals(1)) {
+                        updatedDates.add(dates.get(i));
+                    }
+                }
+            case 1:
+                //Filter the most popular
+                updatedDates.clear();
+                for (int i = 0; i < dates.size(); i++) {
+                    if (dates.get(i).getPublic().equals(1)) {
+                        updatedDates.add(dates.get(i));
+                    }
+                }
+//                updatedDates.sort(Comparator.comparing(Date::getRating));
+                for (int i = 0; i < updatedDates.size(); i++) {
+                    for (int j = 0; j < updatedDates.size(); j++) {
+                        if (updatedDates.get(i).getRating() < updatedDates.get(j).getRating()) {
+                            Date temp = updatedDates.get(i);
+                            updatedDates.add(i, updatedDates.get(j));
+                            updatedDates.add(j, temp);
+                        }
+                    }
+                }
         }
+
         CustomAdapterFavDates adapter = new CustomAdapterFavDates(updatedDates);
         list.setAdapter(adapter);
 
