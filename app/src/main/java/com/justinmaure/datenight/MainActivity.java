@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     public static User currentUser = LoginActivity.user;
     public static FloatingActionButton fab;
+    public static BottomNavigationView navigation;
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
 
         fab = findViewById(R.id.floatingActionButton);

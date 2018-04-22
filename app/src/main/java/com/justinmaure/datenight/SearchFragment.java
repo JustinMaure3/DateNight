@@ -65,6 +65,7 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+        MainActivity.navigation.setVisibility(View.VISIBLE);
         MainActivity.fab.hide();
 
         return view;

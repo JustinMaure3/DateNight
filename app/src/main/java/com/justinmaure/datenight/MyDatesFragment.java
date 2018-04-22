@@ -73,6 +73,7 @@ public class MyDatesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_dates, container, false);
+        MainActivity.navigation.setVisibility(View.VISIBLE);
         RecyclerView list = view.findViewById(R.id.myDatesList);
         DatabaseHelper db = new DatabaseHelper(getContext());
         ArrayList<Date> dates = db.getAllDates();

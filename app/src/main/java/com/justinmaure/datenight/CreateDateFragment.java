@@ -82,6 +82,7 @@ public class CreateDateFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_create_date, container, false);
 
         MainActivity.fab.hide();
+        MainActivity.navigation.setVisibility(View.INVISIBLE);
 
         picture = (ImageView) view.findViewById(R.id.datePicture);
 //        picture.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +124,10 @@ public class CreateDateFragment extends Fragment {
                 description.setText("");
                 picture.setImageResource(R.drawable.ic_launcher_background);
                 isPublic.setChecked(false);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, new MyDatesFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 
