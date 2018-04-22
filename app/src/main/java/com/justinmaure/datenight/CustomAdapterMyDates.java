@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.justinmaure.datenight.Objects.Date;
+import com.justinmaure.datenight.Objects.User;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,8 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
 
     Context context;
 
+    private ImageView isPublic;
+
     //RecyclerView for "My Dates"
     public CustomAdapterMyDates(ArrayList<Date> dates) {
         this.dates = dates;
@@ -38,6 +41,13 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
                 .inflate(R.layout.my_dates_recycler_view, parent, false);
         final CustomViewHolder viewHolder = new CustomViewHolder(view);
         context = parent.getContext();
+
+//        int location = viewHolder.getAdapterPosition();
+//        if (dates.get(location).getPublic() == 1){
+//            viewHolder.isPublic.setImageResource(R.drawable.ic_lock_open_black_24dp);
+//        }else{
+//            viewHolder.isPublic.setImageResource(R.drawable.ic_lock_outline_black_24dp);
+//        }
 
         /**
          * Figure out what the rating thing will be for the user's dates
@@ -67,13 +77,6 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
             }
         });
 
-        /**
-         * Also needs revising.
-         * This will simply allow the user to edit their date idea.
-         * Most of this is already set up but the update date fragment needs to be
-         * created first before this will gain any functionality
-         *
-         */
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +99,19 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
                 transaction.commit();
             }
         });
+
+//        viewHolder.isPublic.setOnClickListener(new ImageView.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int location = viewHolder.getAdapterPosition();
+//
+//                if (dates.get(location).getPublic() == 1){
+//                    isPublic.setImageResource(R.drawable.ic_lock_open_black_24dp);
+//                }else{
+//                    isPublic.setImageResource(R.drawable.ic_lock_outline_black_24dp);
+//                }
+//            }
+//        });
 
         return viewHolder;
     }

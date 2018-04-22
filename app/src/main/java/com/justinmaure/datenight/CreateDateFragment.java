@@ -114,7 +114,7 @@ public class CreateDateFragment extends Fragment {
             public void onClick(View view) {
                 //Add code to grab all variables and make a new date in the date table
                 DatabaseHelper db = new DatabaseHelper(getContext());
-                db.addDate(new Date(dateName.getText().toString(),description.getText().toString(), picture.getDrawable().toString(),isPublicNum, 0, MainActivity.currentUser.getUsername(), 0));
+                db.addDate(new Date(dateName.getText().toString(),description.getText().toString(), picture.getDrawable().toString(),isPublicNum, 0.0f, MainActivity.currentUser.getUsername(), 0));
 //                db.addDate(new Date("date name", "description", "R.drawable.ic_add_circle_black_24dp".toString() , 0, 0, "meee", 0));
                 db.close();
                 dateName.setText("");

@@ -62,15 +62,16 @@
                     android:minHeight="75dp"
                     android:minWidth="75dp"
                     cardView:srcCompat="@drawable/ic_favorite_black_24dp" />
+
             </LinearLayout>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/rating"
-            android:layout_width="match_parent"
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="rating" />
+            android:layout_weight="1" />
 
 
     </LinearLayout>

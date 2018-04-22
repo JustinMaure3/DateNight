@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.justinmaure.datenight.Objects.Date;
@@ -23,6 +24,10 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
 
     Context context;
 
+    private ImageView favButton;
+    private RatingBar rating;
+
+
     //RecyclerView for "Popular Dates"
     public CustomAdapterPopDates(ArrayList<Date> dates) {
         this.dates = dates;
@@ -30,13 +35,27 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, final int viewType){
+
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fav_dates_recycler_view, parent, false);
+
         final CustomAdapterPopDates.CustomViewHolder viewHolder = new CustomAdapterPopDates.CustomViewHolder(view);
+
+        favButton = view.findViewById(R.id.favourited);
+
         context = parent.getContext();
 
+        int location = viewHolder.getAdapterPosition();
+        rating.setRating(dates.get(location).getRating());
 
-        viewHolder.favourited.setOnClickListener(new View.OnClickListener() {
+//        view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+
+        favButton.setOnClickListener(new ImageView.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int location = viewHolder.getAdapterPosition();
@@ -50,6 +69,15 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
                     user.addToFavorites(dates.get(location));
                     viewHolder.favourited.setImageResource(R.drawable.ic_add_circle_black_24dp);
                 }
+            }
+        });
+
+        rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                int location = viewHolder.getAdapterPosition();
+
+                dates.get(location).setRating(rating.getRating());
             }
         });
 
@@ -74,7 +102,7 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
     class CustomViewHolder extends RecyclerView.ViewHolder{
         protected TextView dateName;
         protected TextView description;
-        protected TextView rating;
+        protected RatingBar rating;
         protected ImageView picture;
         protected ImageView favourited;
 
@@ -83,7 +111,7 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
             this.dateName = (TextView) view.findViewById(R.id.dateName);
             this.description = (TextView) view.findViewById(R.id.description);
             this.picture = (ImageView) view.findViewById(R.id.picture);
-            this.rating = (TextView) view.findViewById(R.id.rating);
+            this.rating = (RatingBar) view.findViewById(R.id.rating);
             this.favourited = (ImageView) view.findViewById(R.id.favourited);
         }
     }

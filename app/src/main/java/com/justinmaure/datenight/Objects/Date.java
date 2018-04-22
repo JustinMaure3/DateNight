@@ -13,13 +13,13 @@ public class Date implements Parcelable {
     private String description;
     private String picture;
     private Integer isPublic = 0;
-    private Integer rating;
+    private Float rating;
 //    private String location;
     private String creatorName;
     private Integer isFavourited;
 
     public Date(String dateName, String description, String picture, Integer isPublic,
-                Integer rating, String creatorName, Integer isFavourited){
+                Float rating, String creatorName, Integer isFavourited){
         this.dateName = dateName;
         this.description = description;
         this.picture = picture;
@@ -30,7 +30,7 @@ public class Date implements Parcelable {
     }
 
     public Date(Integer id, String dateName, String description, String picture, Integer isPublic,
-                Integer rating, String creatorName, Integer isFavourited) {
+                Float rating, String creatorName, Integer isFavourited) {
         this.id = id;
         this.dateName = dateName;
         this.description = description;
@@ -77,11 +77,11 @@ public class Date implements Parcelable {
         isPublic = aPublic;
     }
 
-    public Integer getRating() {
+    public Float getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 
@@ -116,6 +116,6 @@ public class Date implements Parcelable {
         parcel.writeInt(this.isPublic);
         parcel.writeInt(this.isFavourited);
         parcel.writeString(this.creatorName);
-        parcel.writeInt(this.rating);
+        parcel.writeFloat(this.rating);
     }
 }

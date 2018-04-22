@@ -192,7 +192,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     cursor.getString(2),
                     cursor.getString(3),
                     cursor.getInt(4),
-                    cursor.getInt(5),
+                    cursor.getFloat(5),
                     cursor.getString(6),
                     cursor.getInt(7));
         }
@@ -212,7 +212,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         cursor.getString(2),
                         cursor.getString(3),
                         cursor.getInt(4),
-                        cursor.getInt(5),
+                        cursor.getFloat(5),
                         cursor.getString(6),
                         cursor.getInt(7)));
             } while (cursor.moveToNext());
