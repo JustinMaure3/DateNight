@@ -1,5 +1,6 @@
 package com.justinmaure.datenight;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,7 +21,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         MyDatesFragment.OnFragmentInteractionListener,
         FavoriteDateFragment.OnFragmentInteractionListener,
         CreateDateFragment.OnFragmentInteractionListener,
-        SearchFragment.OnFragmentInteractionListener {
+        SearchFragment.OnFragmentInteractionListener,
+        SettingsFragment.OnFragmentInteractionListener {
 
 
     public static User currentUser = LoginActivity.user;
@@ -75,8 +77,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.navigation_main:
                 fragment = new MainFragment();
                 break;
-            case R.id.navigation_create_date:
-                fragment = new CreateDateFragment();
+            case R.id.navigation_settings:
+                fragment = new SettingsFragment();
                 break;
             case R.id.navigation_search:
                 fragment = new SearchFragment();
@@ -90,4 +92,5 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public void onFragmentInteraction(Uri uri) {
 
     }
+
 }

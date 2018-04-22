@@ -73,13 +73,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
         if (user.getLoggedInStatus()) {
             Intent i = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(i);
             finish();
         } else {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_login);
             // Set up the login form.
             mUsernameView = (AutoCompleteTextView) findViewById(R.id.username);
             populateAutoComplete();

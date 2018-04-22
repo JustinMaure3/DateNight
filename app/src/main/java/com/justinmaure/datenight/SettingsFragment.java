@@ -121,8 +121,10 @@ public class SettingsFragment extends Fragment {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.currentUser = null;
+                LoginActivity.user.setLoggedIn(false);
                 //Launch the login screen
+                Intent i = new Intent(getActivity(), LoginActivity.class);
+                startActivity(i);
             }
         });
 
