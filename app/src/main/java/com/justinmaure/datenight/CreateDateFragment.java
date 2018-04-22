@@ -1,6 +1,7 @@
 package com.justinmaure.datenight;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -83,6 +84,17 @@ public class CreateDateFragment extends Fragment {
 
         MainActivity.fab.hide();
         MainActivity.navigation.setVisibility(View.INVISIBLE);
+
+        Button backBtn = (Button) view.findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, new MyDatesFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
 
         picture = (ImageView) view.findViewById(R.id.datePicture);
 //        picture.setOnClickListener(new View.OnClickListener() {
