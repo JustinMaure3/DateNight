@@ -81,6 +81,8 @@ public class CreateDateFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_date, container, false);
 
+        MainActivity.fab.hide();
+
         picture = (ImageView) view.findViewById(R.id.datePicture);
 //        picture.setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -3,10 +3,15 @@ package com.justinmaure.datenight;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.justinmaure.datenight.Objects.User;
 
@@ -19,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
 
     public static User currentUser = LoginActivity.user;
+    public static FloatingActionButton fab;
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
@@ -35,6 +41,18 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
+
+        fab = findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, new CreateDateFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+        fab.hide();
 
         //This will change to main fragment later
         loadFragment(new MyDatesFragment());

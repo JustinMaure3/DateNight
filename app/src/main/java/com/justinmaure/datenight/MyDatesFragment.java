@@ -95,6 +95,9 @@ public class MyDatesFragment extends Fragment {
                 };
         list.setLayoutManager(layoutManager);
         list.setItemAnimator(new DefaultItemAnimator());
+
+        MainActivity.fab.show();
+
         return view;
     }
 

@@ -85,6 +85,8 @@ public class FavoriteDateFragment extends Fragment {
                 };
         list.setLayoutManager(layoutManager);
         list.setItemAnimator(new DefaultItemAnimator());
+
+        MainActivity.fab.hide();
         return view;
     }
 

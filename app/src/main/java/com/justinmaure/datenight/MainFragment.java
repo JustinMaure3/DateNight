@@ -93,6 +93,8 @@ public class MainFragment extends Fragment {
                 };
         list.setLayoutManager(layoutManager);
         list.setItemAnimator(new DefaultItemAnimator());
+
+        MainActivity.fab.hide();
         return view;
     }
 
