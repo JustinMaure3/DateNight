@@ -52,14 +52,19 @@ public class CustomAdapterFavDates extends RecyclerView.Adapter {
         viewHolder.isFavourited.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 int location = viewHolder.getAdapterPosition();
 
-                if (dates.get(location).getFavourited().equals(1)){
+                if (dates.get(location).getFavourited().equals(0)){
+//                    MainActivity.currentUser.removeFromFavorites(dates.get(location));
+                    viewHolder.isFavourited.setImageResource(R.drawable.ic_favorite_black_24dp);
+                    dates.get(location).setFavourited(1);
                     MainActivity.currentUser.addToFavorites(dates.get(location));
-                    viewHolder.isFavourited.setImageResource(R.drawable.ic_add_circle_black_24dp);
+                }else {
+//                    MainActivity.currentUser.addToFavorites(dates.get(location));
+                    viewHolder.isFavourited.setImageResource(R.drawable.ic_favorite_border_black_24dp);
                     dates.get(location).setFavourited(0);
                     MainActivity.currentUser.removeFromFavorites(dates.get(location));
+
                 }
             }
         });
