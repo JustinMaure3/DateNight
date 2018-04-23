@@ -102,19 +102,6 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
             }
         });
 
-//        viewHolder.isPublic.setOnClickListener(new ImageView.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int location = viewHolder.getAdapterPosition();
-//
-//                if (dates.get(location).getPublic() == 1){
-//                    isPublic.setImageResource(R.drawable.ic_lock_open_black_24dp);
-//                }else{
-//                    isPublic.setImageResource(R.drawable.ic_lock_outline_black_24dp);
-//                }
-//            }
-//        });
-
         return viewHolder;
     }
 
@@ -123,15 +110,16 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
         Date date = dates.get(position);
         ((CustomViewHolder) holder).dateName.setText(date.getDateName());
         ((CustomViewHolder) holder).description.setText(date.getDescription());
+//        ((CustomViewHolder) holder).picture.setImageResource();
 
-        for (int i = 0; i < dates.size(); i++) {
-            if (dates.get(i).getPublic().equals(1)) {
-                ((CustomViewHolder) holder).isPublic.setImageResource(R.drawable.ic_lock_open_black_24dp);
-            }
-            else if (dates.get(i).getPublic().equals(0)){
-                ((CustomViewHolder) holder).isPublic.setImageResource(R.drawable.ic_lock_outline_black_24dp);
-            }
-        }
+//        for (int i = 0; i < dates.size(); i++) {
+//            if (dates.get(i).getPublic().equals(1)) {
+//                ((CustomViewHolder) holder).isPublic.setImageResource(R.drawable.ic_lock_open_black_24dp);
+//            }
+//            else if (dates.get(i).getPublic().equals(0)){
+//                ((CustomViewHolder) holder).isPublic.setImageResource(R.drawable.ic_lock_outline_black_24dp);
+//            }
+//        }
     }
 
     @Override
