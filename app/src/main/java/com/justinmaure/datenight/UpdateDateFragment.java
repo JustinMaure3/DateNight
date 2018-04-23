@@ -65,6 +65,7 @@ public class UpdateDateFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_update_date, container, false);
 
         MainActivity.fab.hide();
+        MainActivity.navigation.setVisibility(View.INVISIBLE);
 
         picture = view.findViewById(R.id.datePicture);
         dateName = view.findViewById(R.id.dateName);

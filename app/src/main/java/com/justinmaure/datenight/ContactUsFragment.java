@@ -69,6 +69,9 @@ public class ContactUsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_contact_us, container, false);
 
+        MainActivity.fab.hide();
+        MainActivity.navigation.setVisibility(View.INVISIBLE);
+
         Button emailJ = view.findViewById(R.id.emailJ);
         emailJ.setOnClickListener(new View.OnClickListener() {
             @Override
