@@ -42,16 +42,7 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
         final CustomViewHolder viewHolder = new CustomViewHolder(view);
         context = parent.getContext();
 
-//        for (int i = 0; i < dates.size(); i++) {
-//            if (dates.get(i).getPublic().equals(1)) {
-//                viewHolder.isPublic.setImageResource(R.drawable.ic_lock_open_black_24dp);
-////                this.notifyDataSetChanged();
-//            }
-//            else if (dates.get(i).getFavourited().equals(0)){
-//                viewHolder.isPublic.setImageResource(R.drawable.ic_lock_outline_black_24dp);
-////                this.notifyDataSetChanged();
-//            }
-//        }
+
 
 //        int location = viewHolder.getAdapterPosition();
 //        if (dates.get(location).getPublic() == 1){
@@ -132,6 +123,15 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
         Date date = dates.get(position);
         ((CustomViewHolder) holder).dateName.setText(date.getDateName());
         ((CustomViewHolder) holder).description.setText(date.getDescription());
+
+        for (int i = 0; i < dates.size(); i++) {
+            if (dates.get(i).getPublic().equals(1)) {
+                ((CustomViewHolder) holder).isPublic.setImageResource(R.drawable.ic_lock_open_black_24dp);
+            }
+            else if (dates.get(i).getPublic().equals(0)){
+                ((CustomViewHolder) holder).isPublic.setImageResource(R.drawable.ic_lock_outline_black_24dp);
+            }
+        }
     }
 
     @Override

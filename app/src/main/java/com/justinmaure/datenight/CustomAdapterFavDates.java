@@ -38,17 +38,6 @@ public class CustomAdapterFavDates extends RecyclerView.Adapter {
         final CustomAdapterFavDates.CustomViewHolder viewHolder = new CustomAdapterFavDates.CustomViewHolder(view);
         context = parent.getContext();
 
-
-        /**
-         * This will trigger when the user taps the heart icon to favorite the date.
-         * It should:
-         * make the heart icon turn red
-         * add the date to the user's favorite dates database
-         *
-         * otherwise, it should:
-         * make the heart icon turn grey
-         * remove the date from the user's favorite dates database
-         */
         viewHolder.isFavourited.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

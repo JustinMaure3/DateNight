@@ -42,32 +42,17 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
         int location = viewHolder.getAdapterPosition();
 
 //        for (int i = 0; i < dates.size(); i++) {
-//            if (dates.get(i).getFavourited().equals(0)) {
+//            if (dates.get(i).getFavourited().equals(1)) {
 //                viewHolder.favourited.setImageResource(R.drawable.ic_favorite_black_24dp);
 //            }
-//            else if (dates.get(i).getFavourited().equals(1)){
+//            else if (dates.get(i).getFavourited().equals(0)){
 //                viewHolder.favourited.setImageResource(R.drawable.ic_favorite_border_black_24dp);
 //            }
 //        }
-
-
-        for (int i = 0; i < dates.size(); i++) {
-            if (dates.get(i).getFavourited().equals(1)) {
-                viewHolder.favourited.setImageResource(R.drawable.ic_favorite_black_24dp);
-            }
-            else if (dates.get(i).getFavourited().equals(0)){
-                viewHolder.favourited.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-            }
-        }
 //        int location = viewHolder.getAdapterPosition();
 //        rating.setRating(dates.get(location).getRating());
 
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+
 
         viewHolder.favourited.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,5 +1,5 @@
 
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,50 +15,77 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:background="@android:color/transparent"
             android:text="Back"
-            android:textColor="@android:color/holo_blue_light" />
+            android:textColor="@android:color/holo_blue_light"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/datePicture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|center"
-            android:src="@mipmap/ic_launcher_round" />
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@mipmap/ic_launcher_round"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/backBtn" />
 
         <TextView
             android:id="@+id/dateNameLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="0"
-            android:text="Date Name" />
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="Date Name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/datePicture" />
 
         <EditText
             android:id="@+id/dateName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="161dp"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toEndOf="@+id/dateNameLabel"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/dateDescriptionLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description" />
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="Description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateNameLabel" />
 
         <EditText
             android:id="@+id/dateDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toEndOf="@+id/dateDescriptionLabel"
+            app:layout_constraintTop_toBottomOf="@+id/dateName" />
 
 
         <Switch
             android:id="@+id/isPublic"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Private" />
+            android:layout_height="27dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="Private"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateDescriptionLabel" />
 
         <Button
             android:id="@+id/submitBtn"
@@ -66,6 +93,10 @@
             android:layout_height="wrap_content"
             android:layout_column="0"
             android:layout_columnSpan="2"
-            android:text="Create Date" />
-</GridLayout>
+            android:layout_marginTop="16dp"
+            android:text="Create Date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/isPublic" />
+</android.support.constraint.ConstraintLayout>
 

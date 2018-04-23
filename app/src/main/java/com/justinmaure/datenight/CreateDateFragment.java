@@ -97,12 +97,12 @@ public class CreateDateFragment extends Fragment {
         });
 
         picture = (ImageView) view.findViewById(R.id.datePicture);
-//        picture.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //Add code to launch the camera to upload a picture to the image view
-//            }
-//        });
+        picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         dateName = (EditText) view.findViewById(R.id.dateName);
 

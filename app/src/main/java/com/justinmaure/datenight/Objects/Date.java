@@ -14,7 +14,6 @@ public class Date implements Parcelable {
     private String picture;
     private Integer isPublic = 0;
     private Float rating;
-//    private String location;
     private String creatorName;
     private Integer isFavourited;
 
