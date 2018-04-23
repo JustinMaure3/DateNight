@@ -23,6 +23,7 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
 
     Context context;
 
+    ImageView favImage;
 
     //RecyclerView for "Popular Dates"
     public CustomAdapterPopDates(ArrayList<Date> dates) {
@@ -38,6 +39,26 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
         final CustomViewHolder viewHolder = new CustomViewHolder(view);
         context = parent.getContext();
 
+        int location = viewHolder.getAdapterPosition();
+
+//        for (int i = 0; i < dates.size(); i++) {
+//            if (dates.get(i).getFavourited().equals(0)) {
+//                viewHolder.favourited.setImageResource(R.drawable.ic_favorite_black_24dp);
+//            }
+//            else if (dates.get(i).getFavourited().equals(1)){
+//                viewHolder.favourited.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+//            }
+//        }
+
+
+        for (int i = 0; i < dates.size(); i++) {
+            if (dates.get(i).getFavourited().equals(1)) {
+                viewHolder.favourited.setImageResource(R.drawable.ic_favorite_black_24dp);
+            }
+            else if (dates.get(i).getFavourited().equals(0)){
+                viewHolder.favourited.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+            }
+        }
 //        int location = viewHolder.getAdapterPosition();
 //        rating.setRating(dates.get(location).getRating());
 
@@ -54,10 +75,15 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
                 int location = viewHolder.getAdapterPosition();
 
                 if (dates.get(location).getFavourited().equals(0)){
-                    MainActivity.currentUser.removeFromFavorites(dates.get(location));
+//                    MainActivity.currentUser.removeFromFavorites(dates.get(location));
                     viewHolder.favourited.setImageResource(R.drawable.ic_favorite_black_24dp);
                     dates.get(location).setFavourited(1);
                     MainActivity.currentUser.addToFavorites(dates.get(location));
+                }else {
+//                    MainActivity.currentUser.removeFromFavorites(dates.get(location));
+                    viewHolder.favourited.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                    dates.get(location).setFavourited(0);
+                    MainActivity.currentUser.removeFromFavorites(dates.get(location));
                 }
             }
         });
@@ -80,10 +106,10 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
         Date date = dates.get(position);
         ((CustomAdapterPopDates.CustomViewHolder) holder).dateName.setText(date.getDateName());
         ((CustomViewHolder) holder).rating.setRating(date.getRating());
-        if (date.getFavourited().equals(1)) {
+        if (date.getFavourited().equals(0)) {
             ((CustomViewHolder) holder).favourited.setImageResource(R.drawable.ic_favorite_black_24dp);
-        } else if (date.getFavourited().equals(0)) {
-            ((CustomViewHolder) holder).favourited.setImageResource(R.drawable.ic_add_circle_black_24dp);
+        } else if (date.getFavourited().equals(1)) {
+            ((CustomViewHolder) holder).favourited.setImageResource(R.drawable.ic_favorite_border_black_24dp);
         }
 
     }
