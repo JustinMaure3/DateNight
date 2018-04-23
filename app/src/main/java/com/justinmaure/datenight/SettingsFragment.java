@@ -35,7 +35,7 @@ public class SettingsFragment extends Fragment {
 
     TextView usernameLabel;
     Button forgotPasswordBtn;
-    Button changeEmailBtn;
+    Button contactBtn;
     Button popularFilterBtn;
     Button recentFilterBtn;
     Button creditsBtn;
@@ -145,6 +145,19 @@ public class SettingsFragment extends Fragment {
                 transaction.commit();
             }
         });
+
+        //Contact Us
+        contactBtn = view.findViewById(R.id.contactUsBtn);
+        contactBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, new ContactUsFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
 
         //Log out button
         logoutBtn = view.findViewById(R.id.logoutBtn);
