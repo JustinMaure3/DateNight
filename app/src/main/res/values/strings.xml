@@ -21,4 +21,11 @@
         completions."
     </string>
     <string name="title_activity_register">RegisterActivity</string>
+
+    <string-array name="filter_options">
+        <item>Recent</item>
+        <item>Popular</item>
+    </string-array>
+
+    <string name="filter_title">Filter by:</string>
 </resources>

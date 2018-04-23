@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -36,6 +38,7 @@ public class SettingsFragment extends Fragment {
     Button changeEmailBtn;
     Button popularFilterBtn;
     Button recentFilterBtn;
+    Button creditsBtn;
     Button logoutBtn;
 
     private OnFragmentInteractionListener mListener;
@@ -74,6 +77,7 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
@@ -83,6 +87,8 @@ public class SettingsFragment extends Fragment {
         //Username Label
         usernameLabel = view.findViewById(R.id.usernameLabel);
         usernameLabel.setText(MainActivity.currentUser.getUsername());
+
+
 
         //Filter the main page to show the most recent dates
         recentFilterBtn = view.findViewById(R.id.recentFilterBtn);
@@ -124,6 +130,19 @@ public class SettingsFragment extends Fragment {
                 emailIntent.putExtra(Intent.EXTRA_TEXT, "Hello, " + MainActivity.currentUser.getUsername()
                         + "! Here is your password for Date Night... " + MainActivity.currentUser.getPassword());
                 startActivity(Intent.createChooser(emailIntent, "Date Night"));
+            }
+        });
+
+        //Credits button
+        creditsBtn = view.findViewById(R.id.creditsBtn);
+        creditsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.content, new CreditsFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 

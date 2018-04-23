@@ -6,21 +6,46 @@
     tools:context="com.justinmaure.datenight.SettingsFragment">
 
 
-    <TextView
-        android:id="@+id/usernameLabel"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Username"
-        android:textAlignment="center"
-        android:textSize="24sp" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="16dp"
+            android:text="Logged in as:"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/usernameLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="16dp"
+            android:text="Username"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <!--<Spinner-->
+        <!--android:id="@+id/filterSpinner"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:entries="@array/filter_options"-->
+        <!--android:prompt="@string/filter_title"/>-->
 
     <Button
         android:id="@+id/recentFilterBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@color/colorContentBackground"
         android:text="Filter Recent" />
 
     <Button
@@ -36,6 +61,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Forgot Password" />
+
+    <Button
+        android:id="@+id/creditsBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Credits" />
 
     <Button
         android:id="@+id/logoutBtn"
