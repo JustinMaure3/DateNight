@@ -31,6 +31,8 @@ public class UpdateDateFragment extends Fragment {
     private Switch isPublic;
     private int isPublicNum = 0;
     private Button submitBtn;
+    private Button previousButton;
+    private Button nextButton;
     FragmentManager fm;
 
     private OnFragmentInteractionListener mListener;
@@ -103,6 +105,23 @@ public class UpdateDateFragment extends Fragment {
                     isPublic.setText("Private");
                     isPublicNum = 0;
                 }
+            }
+        });
+
+        nextButton = (Button) view.findViewById(R.id.nextButton);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                picture.setImageResource(R.drawable.ic_local_bar_black_24dp);
+            }
+        });
+
+        previousButton = (Button) view.findViewById(R.id.previousButton);
+        previousButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int i = 1;
+                picture.setImageResource(R.drawable.ic_landscape_black_24dp);
             }
         });
 

@@ -41,7 +41,6 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
 
         int location = viewHolder.getAdapterPosition();
 
-<<<<<<< HEAD
 //        for (int i = 0; i < dates.size(); i++) {
 //            if (dates.get(i).getFavourited().equals(1)) {
 //                viewHolder.favourited.setImageResource(R.drawable.ic_favorite_black_24dp);
@@ -55,8 +54,7 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
 
 
 
-=======
->>>>>>> staging
+
         viewHolder.favourited.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

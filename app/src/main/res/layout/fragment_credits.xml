@@ -11,28 +11,62 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="@string/hello_blank_fragment"
         android:textAlignment="viewStart"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:text="App Created By:" />
+        android:text="App Created By:" />
 
     <TextView
         android:id="@+id/creator1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="TextView"
         android:textAlignment="viewStart"
-        tools:text="Justin Maure" />
+        android:text="Justin Maure" />
 
     <TextView
         android:id="@+id/creator2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="TextView"
         android:textAlignment="viewStart"
-        tools:text="Max Fontes" />
+        android:text="Max Fontes" />
+
+    <TextView
+        android:id="@+id/extraCredits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Additional Credits"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/picassoCred"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Picasso" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="CardView" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Google Services" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Cai Filiault" />
 
 </LinearLayout>

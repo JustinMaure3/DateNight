@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.justinmaure.datenight.Objects.Date;
 import com.justinmaure.datenight.Objects.User;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,7 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
     Context context;
 
     private ImageView isPublic;
+    private ImageView pic;
 
     //RecyclerView for "My Dates"
     public CustomAdapterMyDates(ArrayList<Date> dates) {
@@ -41,7 +43,6 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
                 .inflate(R.layout.my_dates_recycler_view, parent, false);
         final CustomViewHolder viewHolder = new CustomViewHolder(view);
         context = parent.getContext();
-
 
 
 //        int location = viewHolder.getAdapterPosition();
@@ -130,24 +131,23 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
         Date date = dates.get(position);
         ((CustomViewHolder) holder).dateName.setText(date.getDateName());
         ((CustomViewHolder) holder).description.setText(date.getDescription());
-<<<<<<< HEAD
-//        ((CustomViewHolder) holder).picture.setImageResource();
+//        ((CustomViewHolder) holder).picture.setImageResource((date.getPicture()));
 
-//        for (int i = 0; i < dates.size(); i++) {
-//            if (dates.get(i).getPublic().equals(1)) {
-//                ((CustomViewHolder) holder).isPublic.setImageResource(R.drawable.ic_lock_open_black_24dp);
-//            }
-//            else if (dates.get(i).getPublic().equals(0)){
-//                ((CustomViewHolder) holder).isPublic.setImageResource(R.drawable.ic_lock_outline_black_24dp);
-//            }
+//        if (date.getPicture().equals("bar")){
+//            Picasso.with(context).load(date.getPicture()).into(((CustomViewHolder) holder).picture);
+//        }else if (date.getPicture().equals("sights")){
+//            Picasso.with(context).load(R.drawable.ic_landscape_black_24dp).into(((CustomViewHolder) holder).picture);
+//        }else {
+//            Picasso.with(context).load(R.drawable.ic_account_circle_black_24dp).into(((CustomViewHolder) holder).picture);
 //        }
-=======
+
+
         if (date.getPublic().equals(0)) {
             ((CustomViewHolder) holder).isPublic.setImageResource(R.drawable.ic_lock_outline_black_24dp);
         } else if (date.getPublic().equals(1)) {
             ((CustomViewHolder) holder).isPublic.setImageResource(R.drawable.ic_lock_open_black_24dp);
         }
->>>>>>> staging
+
     }
 
     @Override
