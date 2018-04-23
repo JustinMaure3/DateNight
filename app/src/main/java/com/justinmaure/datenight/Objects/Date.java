@@ -74,7 +74,7 @@ public class Date implements Parcelable {
     }
 
     public void setPublic(Integer aPublic) {
-        isPublic = aPublic;
+        this.isPublic = aPublic;
     }
 
     public Float getRating() {
@@ -98,7 +98,7 @@ public class Date implements Parcelable {
     }
 
     public void setFavourited(Integer favourited) {
-        isFavourited = favourited;
+        this.isFavourited = favourited;
     }
 
 
