@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.justinmaure.datenight.Objects.Date;
@@ -42,18 +43,20 @@ public class CustomAdapterFavDates extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 int location = viewHolder.getAdapterPosition();
+                DatabaseHelper db = new DatabaseHelper(context);
 
                 if (dates.get(location).getFavourited().equals(0)){
-//                    MainActivity.currentUser.removeFromFavorites(dates.get(location));
                     viewHolder.isFavourited.setImageResource(R.drawable.ic_favorite_black_24dp);
                     dates.get(location).setFavourited(1);
+                    db.updateDate(dates.get(location));
                     MainActivity.currentUser.addToFavorites(dates.get(location));
+                    db.close();
                 }else {
-//                    MainActivity.currentUser.addToFavorites(dates.get(location));
                     viewHolder.isFavourited.setImageResource(R.drawable.ic_favorite_border_black_24dp);
                     dates.get(location).setFavourited(0);
+                    db.updateDate(dates.get(location));
                     MainActivity.currentUser.removeFromFavorites(dates.get(location));
-
+                    db.close();
                 }
             }
         });
@@ -66,6 +69,7 @@ public class CustomAdapterFavDates extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Date date = dates.get(position);
         ((CustomAdapterFavDates.CustomViewHolder) holder).dateName.setText(date.getDateName());
+        ((CustomAdapterFavDates.CustomViewHolder) holder).rating.setRating(date.getRating());
     }
 
     @Override
@@ -79,7 +83,7 @@ public class CustomAdapterFavDates extends RecyclerView.Adapter {
     class CustomViewHolder extends RecyclerView.ViewHolder{
         protected TextView dateName;
         protected TextView description;
-        protected TextView rating;
+        protected RatingBar rating;
         protected ImageView picture;
         protected ImageView isFavourited;
 
@@ -88,7 +92,7 @@ public class CustomAdapterFavDates extends RecyclerView.Adapter {
             this.dateName = (TextView) view.findViewById(R.id.dateName);
             this.description = (TextView) view.findViewById(R.id.description);
             this.picture = (ImageView) view.findViewById(R.id.picture);
-            this.rating = (TextView) view.findViewById(R.id.rating);
+            this.rating = (RatingBar) view.findViewById(R.id.ratingBar);
             this.isFavourited = (ImageView) view.findViewById(R.id.favourited);
 
         }

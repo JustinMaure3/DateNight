@@ -41,6 +41,7 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
 
         int location = viewHolder.getAdapterPosition();
 
+<<<<<<< HEAD
 //        for (int i = 0; i < dates.size(); i++) {
 //            if (dates.get(i).getFavourited().equals(1)) {
 //                viewHolder.favourited.setImageResource(R.drawable.ic_favorite_black_24dp);
@@ -54,21 +55,26 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
 
 
 
+=======
+>>>>>>> staging
         viewHolder.favourited.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int location = viewHolder.getAdapterPosition();
+                DatabaseHelper db = new DatabaseHelper(context);
 
                 if (dates.get(location).getFavourited().equals(0)){
-//                    MainActivity.currentUser.removeFromFavorites(dates.get(location));
                     viewHolder.favourited.setImageResource(R.drawable.ic_favorite_black_24dp);
                     dates.get(location).setFavourited(1);
+                    db.updateDate(dates.get(location));
                     MainActivity.currentUser.addToFavorites(dates.get(location));
-                }else {
-//                    MainActivity.currentUser.removeFromFavorites(dates.get(location));
+                    db.close();
+                } else if (dates.get(location).getFavourited().equals(1)) {
                     viewHolder.favourited.setImageResource(R.drawable.ic_favorite_border_black_24dp);
                     dates.get(location).setFavourited(0);
+                    db.updateDate(dates.get(location));
                     MainActivity.currentUser.removeFromFavorites(dates.get(location));
+                    db.close();
                 }
             }
         });
@@ -77,8 +83,11 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
                 int location = viewHolder.getAdapterPosition();
+                DatabaseHelper db = new DatabaseHelper(context);
 
                 dates.get(location).setRating(viewHolder.rating.getRating());
+                db.updateDate(dates.get(location));
+                db.close();
             }
         });
 
@@ -91,12 +100,12 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
         Date date = dates.get(position);
         ((CustomAdapterPopDates.CustomViewHolder) holder).dateName.setText(date.getDateName());
         ((CustomViewHolder) holder).rating.setRating(date.getRating());
-        if (date.getFavourited().equals(0)) {
+        if (dates.get(position).getFavourited().equals(1)) {
             ((CustomViewHolder) holder).favourited.setImageResource(R.drawable.ic_favorite_black_24dp);
-        } else if (date.getFavourited().equals(1)) {
+        }
+        else if (dates.get(position).getFavourited().equals(0)){
             ((CustomViewHolder) holder).favourited.setImageResource(R.drawable.ic_favorite_border_black_24dp);
         }
-
     }
 
     @Override

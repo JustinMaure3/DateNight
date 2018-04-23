@@ -102,6 +102,26 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
             }
         });
 
+        viewHolder.isPublic.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int location = viewHolder.getAdapterPosition();
+                DatabaseHelper db = new DatabaseHelper(context);
+
+                if (dates.get(location).getPublic().equals(0)){
+                    viewHolder.isPublic.setImageResource(R.drawable.ic_lock_open_black_24dp);
+                    dates.get(location).setPublic(1);
+                    db.updateDate(dates.get(location));
+                    db.close();
+                }else if (dates.get(location).getPublic().equals(1)){
+                    viewHolder.isPublic.setImageResource(R.drawable.ic_lock_outline_black_24dp);
+                    dates.get(location).setPublic(0);
+                    db.updateDate(dates.get(location));
+                    db.close();
+                }
+            }
+        });
+
         return viewHolder;
     }
 
@@ -110,6 +130,7 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
         Date date = dates.get(position);
         ((CustomViewHolder) holder).dateName.setText(date.getDateName());
         ((CustomViewHolder) holder).description.setText(date.getDescription());
+<<<<<<< HEAD
 //        ((CustomViewHolder) holder).picture.setImageResource();
 
 //        for (int i = 0; i < dates.size(); i++) {
@@ -120,6 +141,13 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
 //                ((CustomViewHolder) holder).isPublic.setImageResource(R.drawable.ic_lock_outline_black_24dp);
 //            }
 //        }
+=======
+        if (date.getPublic().equals(0)) {
+            ((CustomViewHolder) holder).isPublic.setImageResource(R.drawable.ic_lock_outline_black_24dp);
+        } else if (date.getPublic().equals(1)) {
+            ((CustomViewHolder) holder).isPublic.setImageResource(R.drawable.ic_lock_open_black_24dp);
+        }
+>>>>>>> staging
     }
 
     @Override
