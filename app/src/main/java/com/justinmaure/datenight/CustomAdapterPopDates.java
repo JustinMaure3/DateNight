@@ -53,8 +53,6 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
 //        rating.setRating(dates.get(location).getRating());
 
 
-
-
         viewHolder.favourited.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

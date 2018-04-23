@@ -131,6 +131,7 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
         Date date = dates.get(position);
         ((CustomViewHolder) holder).dateName.setText(date.getDateName());
         ((CustomViewHolder) holder).description.setText(date.getDescription());
+
 //        ((CustomViewHolder) holder).picture.setImageResource((date.getPicture()));
 
 //        if (date.getPicture().equals("bar")){
@@ -140,6 +141,7 @@ public class CustomAdapterMyDates extends RecyclerView.Adapter {
 //        }else {
 //            Picasso.with(context).load(R.drawable.ic_account_circle_black_24dp).into(((CustomViewHolder) holder).picture);
 //        }
+
 
 
         if (date.getPublic().equals(0)) {
