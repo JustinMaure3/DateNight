@@ -109,7 +109,7 @@ public class MainFragment extends Fragment {
                 }
         }
 
-        CustomAdapterFavDates adapter = new CustomAdapterFavDates(updatedDates);
+        CustomAdapterPopDates adapter = new CustomAdapterPopDates(updatedDates);
         list.setAdapter(adapter);
 
         LinearLayoutManager layoutManager =

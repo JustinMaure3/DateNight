@@ -55,15 +55,12 @@ public class CustomAdapterFavDates extends RecyclerView.Adapter {
 
                 int location = viewHolder.getAdapterPosition();
 
-                if (dates.get(location).getFavourited() == 1){
-
+                if (dates.get(location).getFavourited().equals(1)){
+                    MainActivity.currentUser.addToFavorites(dates.get(location));
+                    viewHolder.isFavourited.setImageResource(R.drawable.ic_add_circle_black_24dp);
+                    dates.get(location).setFavourited(0);
+                    MainActivity.currentUser.removeFromFavorites(dates.get(location));
                 }
-//                viewHolder.isFavourited.getColorFilter()
-//                picture.setImageResource(R.drawable.ic_launcher_background);
-//                int location = viewHolder.getAdapterPosition();
-//                DatabaseHelper db = new DatabaseHelper(context);
-//                db.deleteDate(dates.get(location).getId());
-//                dates.remove(location);
             }
         });
 

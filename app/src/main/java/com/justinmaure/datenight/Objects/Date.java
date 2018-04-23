@@ -16,7 +16,7 @@ public class Date implements Parcelable {
     private Float rating;
 //    private String location;
     private String creatorName;
-    private Integer isFavourited;
+    private Integer isFavourited = 0;
 
     public Date(String dateName, String description, String picture, Integer isPublic,
                 Float rating, String creatorName, Integer isFavourited){
@@ -118,4 +118,28 @@ public class Date implements Parcelable {
         parcel.writeString(this.creatorName);
         parcel.writeFloat(this.rating);
     }
+
+    protected Date(Parcel in) {
+        this.id = in.readInt();
+        this.dateName = in.readString();
+        this.description = in.readString();
+        this.picture = in.readString();
+        this.isPublic = in.readInt();
+        this.rating = in.readFloat();
+        this.creatorName = in.readString();
+        this.isFavourited = in.readInt();
+    }
+
+    public static final Creator<Date> CREATOR = new Creator<Date>() {
+        @Override
+        public Date createFromParcel(Parcel source) {
+            return new Date(source);
+        }
+
+        @Override
+        public Date[] newArray(int size) {
+            return new Date[size];
+        }
+    };
+
 }
