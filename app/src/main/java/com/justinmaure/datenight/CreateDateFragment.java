@@ -99,12 +99,12 @@ public class CreateDateFragment extends Fragment {
         });
 
         picture = (ImageView) view.findViewById(R.id.datePicture);
-        picture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+//        picture.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
 
         dateName = (EditText) view.findViewById(R.id.dateName);
 
@@ -147,7 +147,16 @@ public class CreateDateFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 DatabaseHelper db = new DatabaseHelper(getContext());
-                db.addDate(new Date(dateName.getText().toString(),description.getText().toString(), picture.getDrawable().toString(),isPublicNum, 0.0f, MainActivity.currentUser.getUsername(), 0));
+                    db.addDate(new Date(dateName.getText().toString(),description.getText().toString(), picture.getDrawable().toString(),isPublicNum, 0.0f, MainActivity.currentUser.getUsername(), 0));
+
+
+//                if (pic.equals("bar")) {
+//                    db.addDate(new Date(dateName.getText().toString(),description.getText().toString(), "bar",isPublicNum, 0.0f, MainActivity.currentUser.getUsername(), 0));
+//                }else if (pic.equals("sights")) {
+//                    db.addDate(new Date(dateName.getText().toString(), description.getText().toString(), "sights", isPublicNum, 0.0f, MainActivity.currentUser.getUsername(), 0));
+//                }
+//                }else{
+//                }
                 db.close();
 
                 MainActivity.navigation.setSelectedItemId(R.id.navigation_my_dates);
