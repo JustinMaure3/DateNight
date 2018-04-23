@@ -20,12 +20,8 @@ import java.util.ArrayList;
 
 public class CustomAdapterPopDates extends RecyclerView.Adapter {
     private ArrayList<Date> dates;
-    private ArrayList<User> users;
 
     Context context;
-
-    private ImageView favButton;
-    private RatingBar rating;
 
 
     //RecyclerView for "Popular Dates"
@@ -37,16 +33,13 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, final int viewType){
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fav_dates_recycler_view, parent, false);
+                .inflate(R.layout.pop_dates_recycler_view, parent, false);
 
-        final CustomAdapterPopDates.CustomViewHolder viewHolder = new CustomAdapterPopDates.CustomViewHolder(view);
-
-        favButton = view.findViewById(R.id.favourited);
-
+        final CustomViewHolder viewHolder = new CustomViewHolder(view);
         context = parent.getContext();
 
-        int location = viewHolder.getAdapterPosition();
-        rating.setRating(dates.get(location).getRating());
+//        int location = viewHolder.getAdapterPosition();
+//        rating.setRating(dates.get(location).getRating());
 
 //        view.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -55,29 +48,26 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
 //            }
 //        });
 
-        favButton.setOnClickListener(new ImageView.OnClickListener() {
+        viewHolder.favourited.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 int location = viewHolder.getAdapterPosition();
 
-                User user = users.get(location);
-
-                if (dates.get(location).getFavourited() == 1){
-                    user.removeFromFavorites(dates.get(location));
+                if (dates.get(location).getFavourited().equals(0)){
+                    MainActivity.currentUser.removeFromFavorites(dates.get(location));
                     viewHolder.favourited.setImageResource(R.drawable.ic_favorite_black_24dp);
-                }else{
-                    user.addToFavorites(dates.get(location));
-                    viewHolder.favourited.setImageResource(R.drawable.ic_add_circle_black_24dp);
+                    dates.get(location).setFavourited(1);
+                    MainActivity.currentUser.addToFavorites(dates.get(location));
                 }
             }
         });
 
-        rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+        viewHolder.rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
                 int location = viewHolder.getAdapterPosition();
 
-                dates.get(location).setRating(rating.getRating());
+                dates.get(location).setRating(viewHolder.rating.getRating());
             }
         });
 
@@ -89,6 +79,13 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Date date = dates.get(position);
         ((CustomAdapterPopDates.CustomViewHolder) holder).dateName.setText(date.getDateName());
+        ((CustomViewHolder) holder).rating.setRating(date.getRating());
+        if (date.getFavourited().equals(1)) {
+            ((CustomViewHolder) holder).favourited.setImageResource(R.drawable.ic_favorite_black_24dp);
+        } else if (date.getFavourited().equals(0)) {
+            ((CustomViewHolder) holder).favourited.setImageResource(R.drawable.ic_add_circle_black_24dp);
+        }
+
     }
 
     @Override
@@ -112,7 +109,7 @@ public class CustomAdapterPopDates extends RecyclerView.Adapter {
             this.description = (TextView) view.findViewById(R.id.description);
             this.picture = (ImageView) view.findViewById(R.id.picture);
             this.rating = (RatingBar) view.findViewById(R.id.rating);
-            this.favourited = (ImageView) view.findViewById(R.id.favourited);
+            this.favourited = (ImageView) view.findViewById(R.id.popFavourited);
         }
     }
 }

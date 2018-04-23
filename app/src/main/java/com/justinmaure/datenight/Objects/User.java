@@ -81,6 +81,11 @@ public class User {
     }
 
     public void removeFromFavorites(Date date) {
-        this.favoritedDates.remove(date);
+        for (int i = 0; i < this.favoritedDates.size(); i++) {
+            if (this.favoritedDates.get(i).getId().equals(date.getId())) {
+                this.favoritedDates.remove(i);
+            }
+        }
+
     }
 }
