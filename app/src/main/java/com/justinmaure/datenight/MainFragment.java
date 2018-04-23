@@ -122,6 +122,7 @@ public class MainFragment extends Fragment {
         list.setLayoutManager(layoutManager);
         list.setItemAnimator(new DefaultItemAnimator());
 
+
         MainActivity.navigation.setVisibility(View.VISIBLE);
         MainActivity.fab.hide();
         return view;
